@@ -58,7 +58,7 @@ export function NavbarMenu() {
                 key={`mobile-link-${idx}`}
                 href={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300"
+                className="relative text-neutral-600 dark:text-neutral-50"
               >
                 <span className="block">{item.name}</span>
               </a>
@@ -67,7 +67,7 @@ export function NavbarMenu() {
               <NavbarButton
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
-                className="w-full text-black/80"
+                className="w-full dark:bg-neutral-700 dark:text-neutral-50 text-black/80"
               >
                 Download Cv
               </NavbarButton>

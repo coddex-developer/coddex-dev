@@ -1,4 +1,4 @@
-import { Box, Text } from "@radix-ui/themes";
+import { Box } from "@radix-ui/themes";
 import { BackgroundBeams } from "./components/ui/background-beams";
 import { ContainerTextFlip } from "./components/ui/container-text-flip";
 import { NavbarMenu } from "./components/NavbarMenu";

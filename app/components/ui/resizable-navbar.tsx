@@ -241,11 +241,11 @@ export const NavbarLogo = () => {
             <Image
                 src={"/logo-coddex.png"}
                 alt="logo"
-                className="w-[40]"
+                className="w-[47]"
                 width={1080}
                 height={1080}
             />
-            <span className="font-bold text-lg text-black/80 dark:text-neutral-50">Codde<span className="text-green-600">X</span> Developer</span>
+            <span className="font-bold text-xl text-black/80 dark:text-neutral-50">Codde<span className="text-green-600">X</span> Developer</span>
         </a>
     );
 };

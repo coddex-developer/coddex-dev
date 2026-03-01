@@ -125,15 +125,6 @@ export default function TimelineComponent() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <Image src="/skills/jsAndTs.png" alt="Portfolio" width={500} height={500}
                             className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/jsAndTs.png" alt="Performance" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/jsAndTs.png" alt="Animation" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/jsAndTs.png" alt="Future" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
                     </div>
                 </div>
             ),

@@ -1,57 +1,118 @@
 "use client";
 import React from "react";
 import { StickyScroll } from "../ui/sticky-scroll-reveal";
-import Image from "next/image";
-
+import { IconBriefcase, IconDatabase, IconFileCode2, IconGauge, IconLayersDifference, IconPower, IconRocket, IconSparkles, IconUserScan } from "@tabler/icons-react";
 
 const content = [
-    {
-        title: "Collaborative Editing",
-        description:
-            "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
-        content: (
-            <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-                Collaborative Editing
-            </div>
-        ),
-    },
-    {
-        title: "Real time changes",
-        description:
-            "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
-        content: (
-            <div className="flex h-full w-full items-center justify-center text-white">
-                <Image
-                    src="/vercel.svg"
-                    width={300}
-                    height={300}
-                    className="h-full w-full object-cover"
-                    alt="linear board demo"
-                />
-            </div>
-        ),
-    },
-    {
-        title: "Version control",
-        description:
-            "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
-        content: (
-            <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
-                Version control
-            </div>
-        ),
-    },
-    {
-        title: "Running out of content",
-        description:
-            "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
-        content: (
-            <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-                Running out of content
-            </div>
-        ),
-    },
+  {
+    title: "Interfaces modernas e performáticas",
+    description:
+      "Desenvolvo interfaces responsivas focadas em experiência do usuário, performance e acessibilidade utilizando React, Next.js e TailwindCSS.",
+    content: (
+      <div className="flex flex-col gap-4 h-full w-full items-center justify-center bg-gradient-to-br from-cyan-500 to-emerald-500 text-white">
+        <IconRocket size={60} />
+        <p className="text-xl font-semibold">Front-End Development</p>
+      </div>
+    ),
+  },
+
+  {
+    title: "Integração com APIs e sistemas",
+    description:
+      "Integro aplicações com APIs REST garantindo comunicação eficiente entre cliente e servidor.",
+    content: (
+      <div className="flex flex-col gap-4 h-full w-full items-center justify-center bg-gradient-to-br from-indigo-500 to-blue-600 text-white">
+        <IconDatabase size={60} />
+        <p className="text-xl font-semibold">API Integration</p>
+      </div>
+    ),
+  },
+
+  {
+    title: "Arquitetura organizada",
+    description:
+      "Estruturo projetos com componentização e separação de responsabilidades para facilitar manutenção.",
+    content: (
+      <div className="flex flex-col gap-4 h-full w-full items-center justify-center bg-gradient-to-br from-orange-500 to-yellow-500 text-white">
+        <IconLayersDifference size={60} />
+        <p className="text-xl font-semibold">Clean Architecture</p>
+      </div>
+    ),
+  },
+
+  {
+    title: "Performance e otimização",
+    description:
+      "Aplico lazy loading, code splitting e renderização híbrida para melhorar carregamento.",
+    content: (
+      <div className="flex flex-col gap-4 h-full w-full items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
+        <IconGauge size={60} />
+        <p className="text-xl font-semibold">Performance First</p>
+      </div>
+    ),
+  },
+
+  {
+    title: "Experiência do usuário (UX)",
+    description:
+      "Interfaces intuitivas com navegação fluida e feedback visual focado no usuário.",
+    content: (
+      <div className="flex flex-col gap-4 h-full w-full items-center justify-center bg-gradient-to-br from-pink-500 to-purple-600 text-white">
+        <IconUserScan size={60} />
+        <p className="text-xl font-semibold">User Experience</p>
+      </div>
+    ),
+  },
+
+  {
+    title: "Desenvolvimento Full Stack",
+    description:
+      "Construção completa de aplicações incluindo front-end, back-end e APIs.",
+    content: (
+      <div className="flex flex-col gap-4 h-full w-full items-center justify-center bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
+        <IconFileCode2 size={60} />
+        <p className="text-xl font-semibold">Full Stack Apps</p>
+      </div>
+    ),
+  },
+
+  {
+    title: "Código limpo e sustentável",
+    description:
+      "Código legível, escalável e padronizado facilitando evolução e trabalho em equipe.",
+    content: (
+      <div className="flex flex-col gap-4 h-full w-full items-center justify-center bg-gradient-to-br from-amber-500 to-red-500 text-white">
+        <IconSparkles size={60} />
+        <p className="text-xl font-semibold">Clean Code</p>
+      </div>
+    ),
+  },
+
+  {
+    title: "Soluções orientadas a negócio",
+    description:
+      "Transformo necessidades reais em soluções digitais alinhadas aos objetivos do negócio.",
+    content: (
+      <div className="flex flex-col gap-4 h-full w-full items-center justify-center bg-gradient-to-br from-sky-500 to-blue-700 text-white">
+        <IconBriefcase size={60} />
+        <p className="text-xl font-semibold">Business Solutions</p>
+      </div>
+    ),
+  },
+
+  {
+    title: "Evolução contínua",
+    description:
+      "Aprendizado constante acompanhando novas tecnologias e boas práticas.",
+    content: (
+      <div className="flex flex-col gap-4 h-full w-full items-center justify-center bg-gradient-to-br from-neutral-700 to-neutral-900 text-white">
+        <IconPower size={60} />
+        <p className="text-xl font-semibold">Continuous Learning</p>
+      </div>
+    ),
+  },
 ];
+
 export function StickyScrollComponent() {
     return (
         <div className="w-full py-4">

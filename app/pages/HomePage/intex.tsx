@@ -18,7 +18,7 @@ export default function HomePage() {
                     </Box>
                 </Box>
             </Box>
-            <Box className="">
+            <Box>
                 <StickyScrollComponent />
             </Box>
             <Flex justify={"center"} className="w-full gap-3 flex-wrap px-5 py-70 items-center">

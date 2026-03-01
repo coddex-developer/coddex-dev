@@ -8,7 +8,7 @@ export default function HomePage() {
     return (
         <>
             <Box>
-                <Box as="div" className="w-full">
+                <Box as="div" className="w-full h-dvh">
                     <Flex justify={"center"} className="relative h-screen w-full flex-col items-center">
                         <p className="text-4xl md:text-7xl  bg-clip-text text-transparent bg-linear-to-b from-neutral-400 dark:from-neutral-200 to-neutral-700  text-center font-sans font-bold">
                             Gabriel Rodrigues

@@ -9,7 +9,7 @@ export default function HomePage() {
             <Box>
                 <Box as="div" className="h-screen relative">
                     <Box className="relative top-1/3">
-                        <p className="relative z-10 text-5xl md:text-7xl  bg-clip-text text-transparent bg-linear-to-b from-neutral-400 dark:from-neutral-200 to-neutral-700  text-center font-sans font-bold">
+                        <p className="relative z-10 text-3xl md:text-7xl  bg-clip-text text-transparent bg-linear-to-b from-neutral-400 dark:from-neutral-200 to-neutral-700  text-center font-sans font-bold">
                             Gabriel Rodrigues
                         </p>
                         <Box className="text-center relative">

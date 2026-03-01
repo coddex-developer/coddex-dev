@@ -1,7 +1,7 @@
 import { StickyScrollComponent } from "@/app/components/StickyScrollComponent"
-import { TextGenerateEffectComponent } from "@/app/components/TextGenerateEffectComponent/intex"
+import TimelineComponent from "@/app/components/TimeLineComponent"
 import { ContainerTextFlip } from "@/app/components/ui/container-text-flip"
-import { Box, Flex } from "@radix-ui/themes"
+import { Box } from "@radix-ui/themes"
 
 export default function HomePage() {
     return (
@@ -18,8 +18,8 @@ export default function HomePage() {
                     </Box>
                 </Box>
             </Box>
-            <Box className="text-center mx-auto w-full ">
-                <TextGenerateEffectComponent />
+            <Box className="">
+                <TimelineComponent />
             </Box>
             <Box>
                 <StickyScrollComponent />

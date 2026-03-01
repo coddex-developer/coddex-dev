@@ -37,7 +37,7 @@ export default function TextGenerateEffect ({
                     return (
                         <motion.span
                             key={word + idx}
-                            className="text-xl bg-clip-text my-20 text-transparent bg-linear-to-b from-neutral-400 dark:from-neutral-200 to-neutral-700 font-sans font-bold opacity-0"
+                            className="text-md md:text-3xl bg-clip-text my-20 text-transparent bg-linear-to-b from-neutral-400 dark:from-neutral-200 to-neutral-700 font-sans font-bold opacity-0"
                             style={{
                                 filter: filter ? "blur(10px)" : "none",
                             }}

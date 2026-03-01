@@ -7,7 +7,7 @@ export default function TimelineComponent() {
         {
             title: "2022 — Início da jornada",
             content: (
-                <div>
+                <div key={1}>
                     <p className="mb-8 text-xs md:text-sm text-neutral-800 dark:text-neutral-200">
                         Em 2022 iniciei meus estudos em programação, aprendendo lógica de
                         programação, fundamentos da web e estruturação de páginas utilizando
@@ -36,7 +36,7 @@ export default function TimelineComponent() {
         {
             title: "2023 — Primeiros projetos reais",
             content: (
-                <div>
+                <div key={2}>
                     <p className="mb-6 text-xs md:text-sm text-neutral-800 dark:text-neutral-200">
                         Durante 2023 avancei para desenvolvimento prático criando meus
                         primeiros projetos completos. Aprendi versionamento com Git,
@@ -68,7 +68,7 @@ export default function TimelineComponent() {
         {
             title: "2024 — Especialização em Front-End",
             content: (
-                <div>
+                <div key={3}>
                     <p className="mb-8 text-xs md:text-sm text-neutral-800 dark:text-neutral-200">
                         Em 2024 direcionei meus estudos para o ecossistema React,
                         aprofundando conhecimentos em componentização, hooks,
@@ -104,7 +104,7 @@ export default function TimelineComponent() {
         {
             title: "2025 — Evolução Full Stack",
             content: (
-                <div>
+                <div key={4}>
                     <p className="mb-8 text-xs md:text-sm text-neutral-800 dark:text-neutral-200">
                         Em 2025 ampliei minhas habilidades para o desenvolvimento Full Stack,
                         criando APIs, estruturando rotas no Next.js e aplicando conceitos de
@@ -140,7 +140,7 @@ export default function TimelineComponent() {
         {
             title: "2026 — Consolidação profissional",
             content: (
-                <div>
+                <div key={5}>
                     <p className="mb-8 text-xs md:text-sm text-neutral-800 dark:text-neutral-200">
                         Atualmente foco na construção de aplicações modernas com alto nível
                         de qualidade visual, performance e arquitetura limpa. Busco evolução

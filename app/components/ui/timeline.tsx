@@ -6,6 +6,7 @@ import {
 } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
 import { TextGenerateEffectComponent } from "../TextGenerateEffectComponent/intex";
+import { MarqueeComponent } from "../MarqueeComponent";
 
 interface TimelineEntry {
     title: string;
@@ -34,10 +35,10 @@ export function Timeline({ data }: { data: TimelineEntry[] }) {
 
     return (
         <div
-            className="w-full bg-white dark:bg-neutral-950 font-sans md:px-10"
+            className="w-full dark:bg-neutral-950 font-sans md:px-10"
             ref={containerRef}
         >
-            <div className="mx-auto text-center md:text-left w-full py-10 md:py-20 bg-gray-100 rounded-lg px-2 md:px-8 lg:px-10">
+            <div className="mx-auto flex flex-col gap-10 text-center md:text-left w-full py-5 md:py-8  rounded-lg px-2 md:px-8 lg:px-10">
                 <h2 className="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-4xl">
                     <TextGenerateEffectComponent />
                 </h2>
@@ -47,6 +48,7 @@ export function Timeline({ data }: { data: TimelineEntry[] }) {
                     aprendendo novas tecnologias, construindo projetos reais e aprimorando minhas
                     habilidades em Front-End, Back-End e desenvolvimento Full Stack.
                 </p>
+                <MarqueeComponent />
             </div>
 
             <div ref={ref} className="relative max-w-7xl mx-auto pb-20">

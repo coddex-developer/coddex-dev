@@ -115,7 +115,7 @@ const content = [
 
 export function StickyScrollComponent() {
     return (
-        <div className="w-full py-4">
+        <div className="w-full py-4 hidden md:flex">
             <StickyScroll content={content} />
         </div>
     );

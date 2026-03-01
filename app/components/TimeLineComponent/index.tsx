@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Timeline } from "../ui/timeline";
+import { CheckCircledIcon } from "@radix-ui/react-icons";
 
 export default function TimelineComponent() {
     const data = [
@@ -16,17 +17,8 @@ export default function TimelineComponent() {
                         web.
                     </p>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <Image src="/skills/html5andJs.png" alt="HTML CSS" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/html5andJs.png" alt="JavaScript" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/html5andJs.png" alt="Logic" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/html5andJs.png" alt="Git" width={500} height={500}
                             className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
                     </div>
                 </div>
@@ -48,17 +40,8 @@ export default function TimelineComponent() {
                         manipulação de estados e integração entre front-end e back-end.
                     </p>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <Image src="/skills/nextAndReact.png" alt="API" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/nextAndReact.png" alt="Projects" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/nextAndReact.png" alt="Git workflow" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/nextAndReact.png" alt="Responsive" width={500} height={500}
                             className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
                     </div>
                 </div>
@@ -77,25 +60,17 @@ export default function TimelineComponent() {
                     </p>
 
                     <div className="mb-8 text-xs md:text-sm text-neutral-700 dark:text-neutral-300 space-y-2">
-                        <div>✅ React e arquitetura baseada em componentes</div>
-                        <div>✅ Next.js e renderização híbrida</div>
-                        <div>✅ TailwindCSS e design responsivo</div>
-                        <div>✅ Consumo avançado de APIs</div>
-                        <div>✅ Boas práticas de UI/UX</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> React e arquitetura baseada em componentes</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Next.js e renderização híbrida</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> TailwindCSS e design responsivo</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Consumo avançado de APIs</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Boas práticas de UI/UX</div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <Image src="/skills/jsAndTs.png" alt="React" width={500} height={500}
                             className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
 
-                        <Image src="/skills/jsAndTs.png" alt="NextJS" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/jsAndTs.png" alt="Tailwind" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/jsAndTs.png" alt="UI" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
                     </div>
                 </div>
             ),
@@ -113,24 +88,15 @@ export default function TimelineComponent() {
                     </p>
 
                     <div className="mb-8 space-y-2 text-xs md:text-sm text-neutral-700 dark:text-neutral-300">
-                        <div>✅ TypeScript aplicado em projetos reais</div>
-                        <div>✅ APIs REST e CRUD completos</div>
-                        <div>✅ Organização escalável de projetos</div>
-                        <div>✅ Context API e gerenciamento de estado</div>
-                        <div>✅ Integração Front + Backend</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> TypeScript aplicado em projetos reais</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> APIs REST e CRUD completos</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Organização escalável de projetos</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Context API e gerenciamento de estado</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Integração Front + Backend</div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <Image src="/skills/jsAndTs.png" alt="TypeScript" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/jsAndTs.png" alt="API REST" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/jsAndTs.png" alt="Fullstack" width={500} height={500}
-                            className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
-
-                        <Image src="/skills/jsAndTs.png" alt="Database" width={500} height={500}
                             className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
                     </div>
                 </div>
@@ -149,14 +115,14 @@ export default function TimelineComponent() {
                     </p>
 
                     <div className="mb-8 space-y-2 text-xs md:text-sm text-neutral-700 dark:text-neutral-300">
-                        <div>✅ Arquitetura escalável em Next.js</div>
-                        <div>✅ Animações e experiências modernas</div>
-                        <div>✅ Performance e otimização</div>
-                        <div>✅ Desenvolvimento orientado a produto</div>
-                        <div>✅ Construção de marca profissional como desenvolvedor</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Arquitetura escalável em Next.js</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Animações e experiências modernas</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Performance e otimização</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Desenvolvimento orientado a produto</div>
+                        <div className="flex gap-1 items-center"><CheckCircledIcon /> Construção de marca profissional como desenvolvedor</div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <Image src="/skills/jsAndTs.png" alt="Portfolio" width={500} height={500}
                             className="h-20 w-full rounded-lg object-cover md:h-44 lg:h-60" />
 

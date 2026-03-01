@@ -7,8 +7,8 @@ import { ChevronDown } from "lucide-react"
 export default function HomePage() {
     return (
         <>
-            <Box>
-                <Box as="div" className="w-full h-dvh">
+            <Box className="h-dvh">
+                <Box as="div" className="w-full">
                     <Flex justify={"center"} className="relative h-screen w-full flex-col items-center">
                         <p className="text-4xl md:text-7xl  bg-clip-text text-transparent bg-linear-to-b from-neutral-400 dark:from-neutral-200 to-neutral-700  text-center font-sans font-bold">
                             Gabriel Rodrigues
@@ -17,7 +17,7 @@ export default function HomePage() {
                             <ContainerTextFlip words={["Desenvolverdor Front-End", "Desenvolverdor Back-Edn", "Desenvolverdor Api-Rest"]} />
                         </Box>
                         <Box>
-                            <ChevronDown className="absolute text-neutral-700 dark:text-neutral-400 top-11/12 animate-bounce duration-75 ease-in-out" />
+                            <ChevronDown size={30}  className="absolute opacity-50 text-neutral-700 dark:text-neutral-400 left-1/2 top-10/12 animate-bounce duration-75 ease-in-out" />
                         </Box>
                     </Flex>
                 </Box>

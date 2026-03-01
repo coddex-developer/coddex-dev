@@ -1,23 +1,15 @@
 import { Box } from "@radix-ui/themes";
 import { BackgroundBeams } from "./components/ui/background-beams";
-import { ContainerTextFlip } from "./components/ui/container-text-flip";
 import { NavbarMenu } from "./components/NavbarMenu";
+import HomePage from "./pages/HomePage/intex";
 
 export default function Home() {
+
+
   return (
     <>
       <NavbarMenu />
-      <Box as="div" className="w-dvw">
-        <Box as="div" className="bg-gray-900 pt-20">
-          <p className="relative z-10 text-5xl md:text-7xl  bg-clip-text text-transparent bg-linear-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold">
-            Gabriel Rodrigues
-          </p>
-          <Box className="text-center">
-            <ContainerTextFlip words={["Desenvolverdor Front-End", "Desenvolverdor Back-Edn", "Desenvolverdor Api-Rest"]} />
-          </Box>
-        </Box>
-        <BackgroundBeams className="bg-gray-50 dark:bg-neutral-950 h-dvh" />
-      </Box>
+      <HomePage />
     </>
   );
 }

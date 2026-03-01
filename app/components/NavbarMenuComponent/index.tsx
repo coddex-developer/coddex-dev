@@ -1,4 +1,5 @@
 "use client";
+import { DownloadCloud } from "lucide-react";
 import { MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle, Navbar, NavbarButton, NavbarLogo, NavBody, NavItems } from "../ui/resizable-navbar";
 import { useState } from "react";
 
@@ -35,7 +36,7 @@ export function NavbarMenuComponent() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton className="text-black/80" variant="primary">Download Cv</NavbarButton>
+            <NavbarButton className="text-black/80 flex gap-1 items-center" variant="primary"><DownloadCloud /> Download Cv</NavbarButton>
           </div>
         </NavBody>
 
@@ -67,9 +68,9 @@ export function NavbarMenuComponent() {
               <NavbarButton
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
-                className="w-full dark:bg-neutral-700 dark:text-neutral-50 text-black/80"
+                className="w-full flex gap-1 items-center justify-center dark:bg-neutral-700 dark:text-neutral-50 text-black/80"
               >
-                Download Cv
+                <DownloadCloud /> Download Cv
               </NavbarButton>
             </div>
           </MobileNavMenu>

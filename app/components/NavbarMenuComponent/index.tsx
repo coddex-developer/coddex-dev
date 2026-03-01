@@ -9,7 +9,7 @@ interface TextItemsProps {
 
 
 
-export function NavbarMenu() {
+export function NavbarMenuComponent() {
   const navItems: TextItemsProps[] = [
     {
       name: "Sobre",

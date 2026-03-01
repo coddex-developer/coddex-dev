@@ -1,4 +1,3 @@
-import { MarqueeComponent } from "@/app/components/MarqueeComponent"
 import { StickyScrollComponent } from "@/app/components/StickyScrollComponent"
 import TimelineComponent from "@/app/components/TimeLineComponent"
 import { ContainerTextFlip } from "@/app/components/ui/container-text-flip"

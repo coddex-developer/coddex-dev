@@ -50,8 +50,7 @@ function Logo({ children }: { children: React.ReactNode }) {
       className="
         flex items-center justify-center
         mx-6 shrink-0
-        w-14 h-14
-        sm:w-16 sm:h-16
+        w-18 h-18
         md:w-20 md:h-20
         lg:w-24 lg:h-24
         xl:w-28 xl:h-28

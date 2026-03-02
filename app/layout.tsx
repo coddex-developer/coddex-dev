@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { BackgroundBeams } from "./components/ui/background-beams";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,8 +36,10 @@ export default function RootLayout({
               height="5%"
               position="bottom"
             />
-            <ScrollProgress />
+            <ScrollProgress /> 
           </div>
+          
+            <BackgroundBeams className="fixed pointer-events-none -z-10" />
         </body>
       </html>
     </>

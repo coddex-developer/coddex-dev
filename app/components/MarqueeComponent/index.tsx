@@ -16,6 +16,7 @@ import {
 } from "@icons-pack/react-simple-icons";
 
 import Marquee from "@/components/ui/marquee";
+import { Flex } from "@radix-ui/themes";
 
 export function MarqueeComponent() {
   return (
@@ -25,20 +26,20 @@ export function MarqueeComponent() {
       pauseOnHover
       className="py-8"
     >
-      <Logo><SiReact size={40} color="#61DAFB" /></Logo>
-      <Logo><SiNextdotjs size={40} color="#000000" /></Logo>
-      <Logo><SiPostgresql size={40} color="#4169E1" /></Logo>
-      <Logo><SiGit size={40} color="#F05032" /></Logo>
-      <Logo><SiGithub size={40} color="#181717" /></Logo>
-      <Logo><SiExpress size={40} color="#000000" /></Logo>
-      <Logo><SiBootstrap size={40} color="#7952B3" /></Logo>
-      <Logo><SiTypescript size={40} color="#3178C6" /></Logo>
-      <Logo><SiJavascript size={40} color="#F7DF1E" /></Logo>
-      <Logo><SiTailwindcss size={40} color="#06B6D4" /></Logo>
-      <Logo><SiSass size={40} color="#CC6699" /></Logo>
-      <Logo><SiPrisma size={40} color="#2D3748" /></Logo>
-      <Logo><SiEjs size={40} color="#B4CA65" /></Logo>
-      <Logo><SiNodedotjs size={40} color="#339933" /></Logo>
+      <Logo><SiReact size={32} color="#61DAFB" /></Logo>
+      <Logo><SiNextdotjs size={32} color="#000000" /></Logo>
+      <Logo><SiPostgresql size={32} color="#4169E1" /></Logo>
+      <Logo><SiGit size={32} color="#F05032" /></Logo>
+      <Logo><SiGithub size={32} color="#181717" /></Logo>
+      <Logo><SiExpress size={32} color="#000000" /></Logo>
+      <Logo><SiBootstrap size={32} color="#7952B3" /></Logo>
+      <Logo><SiTypescript size={32} color="#3178C6" /></Logo>
+      <Logo><SiJavascript size={32} color="#F7DF1E" /></Logo>
+      <Logo><SiTailwindcss size={32} color="#06B6D4" /></Logo>
+      <Logo><SiSass size={32} color="#CC6699" /></Logo>
+      <Logo><SiPrisma size={32} color="#2D3748" /></Logo>
+      <Logo><SiEjs size={32} color="#B4CA65" /></Logo>
+      <Logo><SiNodedotjs size={32} color="#339933" /></Logo>
     </Marquee>
   );
 }
@@ -46,17 +47,20 @@ export function MarqueeComponent() {
 
 function Logo({ children }: { children: React.ReactNode }) {
   return (
-    <div
+    <Flex
+      as="div"
+      align="center"
+      justify="center"
       className="
-        flex items-center justify-center
-        mx-6 shrink-0
+        mx-6
+        shrink-0
         transition-transform duration-300
         hover:scale-110
       "
     >
-      <div>
+      <div className="px-6 py-4 flex items-center justify-center">
         {children}
       </div>
-    </div>
+    </Flex>
   );
 }

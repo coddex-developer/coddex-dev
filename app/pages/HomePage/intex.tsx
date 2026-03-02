@@ -27,10 +27,9 @@ export default function HomePage() {
                 <ChevronDown size={35} className="absolute opacity-50 text-neutral-700 dark:text-neutral-400 block text-center -translate-x-1/2 -translate-y-1/2 left-1/2 top-10/12 animate-bounce duration-200 ease-in-out" />
             </Box>
             <Box>
-                <Flex className="flex-col items-center gap-10 md:text-base w-full py-10 md:py-32  rounded-lg px-4 md:px-8 lg:px-10">
-                <MarqueeComponent />
+                <Flex className="flex-col items-center gap-1 md:text-base w-full mb-5 py-7 md:py-32  rounded-lg px-4 md:px-8 lg:px-10">
                 
-                <h2 className="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-4xl">
+                <h2 className="text-xl md:text-4xl mb-4 text-black dark:text-white text-center">
                     <TextGenerateEffectComponent />
                 </h2>
 
@@ -43,12 +42,6 @@ export default function HomePage() {
             </Box>
             <Box>
                 <TextParallaxContentComponent />
-            </Box>
-            <Box className="">
-                <TimelineComponent />
-            </Box>
-            <Box>
-                <StickyScrollComponent />
             </Box>
         </>
     )

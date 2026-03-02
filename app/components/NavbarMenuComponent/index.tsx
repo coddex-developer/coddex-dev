@@ -2,6 +2,7 @@
 import { DownloadCloud } from "lucide-react";
 import { MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle, Navbar, NavbarButton, NavbarLogo, NavBody, NavItems } from "../ui/resizable-navbar";
 import { useState } from "react";
+import { AnimatedThemeToggler } from "../ui/AnimatedThemeToggler";
 
 interface TextItemsProps {
   name: string
@@ -35,7 +36,8 @@ export function NavbarMenuComponent() {
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-7">
+            <AnimatedThemeToggler />
             <NavbarButton className="text-black/80 flex gap-1 items-center" variant="primary"><DownloadCloud /> Download Cv</NavbarButton>
           </div>
         </NavBody>
@@ -44,6 +46,7 @@ export function NavbarMenuComponent() {
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
+            <AnimatedThemeToggler />
             <MobileNavToggle
               isOpen={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -55,14 +58,16 @@ export function NavbarMenuComponent() {
             onClose={() => setIsMobileMenuOpen(false)}
           >
             {navItems.map((item, idx) => (
-              <a
-                key={`mobile-link-${idx}`}
-                href={item.link}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-50"
-              >
-                <span className="block">{item.name}</span>
-              </a>
+              <>
+                <a
+                  key={`mobile-link-${idx}`}
+                  href={item.link}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="relative text-neutral-600 dark:text-neutral-50"
+                >
+                  <span className="block">{item.name}</span>
+                </a>
+              </>
             ))}
             <div className="flex w-full flex-col gap-4">
               <NavbarButton

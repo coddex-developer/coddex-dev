@@ -19,7 +19,6 @@ export const AnimatedThemeToggler = ({
   const [isDark, setIsDark] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
-  // Detecta mudanças no tema
   useEffect(() => {
     const updateTheme = () => {
       setIsDark(
@@ -105,7 +104,7 @@ export const AnimatedThemeToggler = ({
       )}
       {...props}
     >
-      {isDark ? <Sun className="text-yellow-300" size={25} /> : <Moon size={25} />}
+      {isDark ? <Sun size={25} /> : <Moon size={25} />}
       <span className="sr-only">
         Toggle theme
       </span>

@@ -1,5 +1,6 @@
 import HomePage from "./pages/HomePage/intex";
 import { NavbarMenuComponent } from "./components/NavbarMenuComponent";
+import { Pointer } from "@/components/ui/pointer";
 
 export default function Home() {
 
@@ -8,6 +9,7 @@ export default function Home() {
     <>
       <NavbarMenuComponent />
       <HomePage />
+      <Pointer />
     </>
   );
 }

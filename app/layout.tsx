@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { BackgroundBeams } from "./components/ui/background-beams";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,9 +27,14 @@ export default function RootLayout({
     <>
       <html lang="pt-BR">
         <body
-          className={`${geistSans.variable} px-6 md:px-16  max-w-7xl mx-auto  ${geistMono.variable} antialiased`}>
+          className={`${geistSans.variable} md:px-16  max-w-7xl mx-auto  ${geistMono.variable} antialiased`}>
           {children}
-          <BackgroundBeams />
+          <div className="pointer-events-none fixed inset-0 z-50">
+            <ProgressiveBlur
+              height="5%"
+              position="bottom"
+            />
+          </div>
         </body>
       </html>
     </>

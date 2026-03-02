@@ -38,7 +38,6 @@ export default function RootLayout({
             />
             <ScrollProgress /> 
           </div>
-          
             <BackgroundBeams className="fixed pointer-events-none -z-10" />
         </body>
       </html>

@@ -1,11 +1,9 @@
-import { MarqueeComponent } from "@/app/components/MarqueeComponent"
-import { StickyScrollComponent } from "@/app/components/StickyScrollComponent"
+"use client"
 import { TextGenerateEffectComponent } from "@/app/components/TextGenerateEffectComponent/intex"
 import { TextParallaxContentComponent } from "@/app/components/TextParallaxContentComponent"
-import TimelineComponent from "@/app/components/TimeLineComponent"
 import { ContainerTextFlip } from "@/app/components/ui/container-text-flip"
+import WrapperPopUpComponent from "@/app/components/WrapperPopUpComponent"
 import { BlurFade } from "@/components/ui/blur-fade"
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { Box, Flex } from "@radix-ui/themes"
 import { ChevronDown } from "lucide-react"
 
@@ -21,7 +19,7 @@ export default function HomePage() {
                     </BlurFade>
                     <Flex className="w-full items-center max-w-xl flex-col gap-6">
                         <ContainerTextFlip words={["Desenvolverdor Front-End", "Desenvolverdor Back-Edn", "Desenvolverdor Api-Rest"]} />
-                        <InteractiveHoverButton>Entrar em contato</InteractiveHoverButton>
+                        <WrapperPopUpComponent />
                     </Flex>
                 </Flex>
                 <ChevronDown size={35} className="absolute opacity-50 text-neutral-700 dark:text-neutral-400 block text-center -translate-x-1/2 -translate-y-1/2 left-1/2 top-10/12 animate-bounce duration-200 ease-in-out" />

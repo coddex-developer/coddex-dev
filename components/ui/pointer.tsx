@@ -10,14 +10,6 @@ import {
 
 import { cn } from "@/lib/utils"
 
-/**
- * A custom pointer component that displays an animated cursor.
- * Add this as a child to any component to enable a custom pointer when hovering.
- * You can pass custom children to render as the pointer.
- *
- * @component
- * @param {HTMLMotionProps<"div">} props - The component props
- */
 export function Pointer({
   className,
   style,
@@ -26,52 +18,92 @@ export function Pointer({
 }: HTMLMotionProps<"div">): React.ReactNode {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
-  const [isActive, setIsActive] = useState<boolean>(false)
+
+  const [isActive, setIsActive] = useState(false)
+  const [hasMouse, setHasMouse] = useState(false)
+
   const containerRef = useRef<HTMLDivElement>(null)
 
+  // ✅ Detecta se dispositivo possui mouse real
   useEffect(() => {
-    if (typeof window !== "undefined" && containerRef.current) {
-      // Get the parent element directly from the ref
-      const parentElement = containerRef.current.parentElement
+    if (typeof window === "undefined") return
 
-      if (parentElement) {
-        // Add cursor-none to parent
-        parentElement.style.cursor = "none"
+    const mediaQuery = window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    )
 
-        // Add event listeners to parent
-        const handleMouseMove = (e: MouseEvent) => {
-          x.set(e.clientX)
-          y.set(e.clientY)
-          setIsActive(true)
-        }
+    setHasMouse(mediaQuery.matches)
 
-        const handleMouseEnter = (e: MouseEvent) => {
-          x.set(e.clientX)
-          y.set(e.clientY)
-          setIsActive(true)
-        }
+    const handler = () => setHasMouse(mediaQuery.matches)
+    mediaQuery.addEventListener("change", handler)
 
-        const handleMouseLeave = () => {
-          setIsActive(false)
-        }
+    return () =>
+      mediaQuery.removeEventListener("change", handler)
+  }, [])
 
-        parentElement.addEventListener("mousemove", handleMouseMove)
-        parentElement.addEventListener("mouseenter", handleMouseEnter)
-        parentElement.addEventListener("mouseleave", handleMouseLeave)
+  useEffect(() => {
+    if (!hasMouse || !containerRef.current) return
 
-        return () => {
-          parentElement.style.cursor = ""
-          parentElement.removeEventListener("mousemove", handleMouseMove)
-          parentElement.removeEventListener("mouseenter", handleMouseEnter)
-          parentElement.removeEventListener("mouseleave", handleMouseLeave)
-        }
-      }
+    const parentElement =
+      containerRef.current.parentElement
+
+    if (!parentElement) return
+
+    parentElement.style.cursor = "none"
+
+    const handleMouseMove = (e: MouseEvent) => {
+      x.set(e.clientX)
+      y.set(e.clientY)
+      setIsActive(true)
     }
-  }, [x, y])
+
+    const handleMouseEnter = (e: MouseEvent) => {
+      x.set(e.clientX)
+      y.set(e.clientY)
+      setIsActive(true)
+    }
+
+    const handleMouseLeave = () => {
+      setIsActive(false)
+    }
+
+    parentElement.addEventListener(
+      "mousemove",
+      handleMouseMove
+    )
+    parentElement.addEventListener(
+      "mouseenter",
+      handleMouseEnter
+    )
+    parentElement.addEventListener(
+      "mouseleave",
+      handleMouseLeave
+    )
+
+    return () => {
+      parentElement.style.cursor = ""
+
+      parentElement.removeEventListener(
+        "mousemove",
+        handleMouseMove
+      )
+      parentElement.removeEventListener(
+        "mouseenter",
+        handleMouseEnter
+      )
+      parentElement.removeEventListener(
+        "mouseleave",
+        handleMouseLeave
+      )
+    }
+  }, [hasMouse, x, y])
+
+  if (!hasMouse) return null
 
   return (
     <>
       <div ref={containerRef} />
+
       <AnimatePresence>
         {isActive && (
           <motion.div
@@ -105,8 +137,7 @@ export function Pointer({
                 width="24"
                 xmlns="http://www.w3.org/2000/svg"
                 className={cn(
-                  "rotate-[-70deg] stroke-white text-blue-500",
-                  className
+                  "rotate-[-70deg] stroke-white text-blue-500"
                 )}
               >
                 <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z" />

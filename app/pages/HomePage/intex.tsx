@@ -1,4 +1,5 @@
 import { StickyScrollComponent } from "@/app/components/StickyScrollComponent"
+import { TextParallaxContentComponent } from "@/app/components/TextParallaxContentComponent"
 import TimelineComponent from "@/app/components/TimeLineComponent"
 import { ContainerTextFlip } from "@/app/components/ui/container-text-flip"
 import { BlurFade } from "@/components/ui/blur-fade"
@@ -22,6 +23,9 @@ export default function HomePage() {
                     </Flex>
                 </Flex>
                 <ChevronDown size={35} className="absolute opacity-50 text-neutral-700 dark:text-neutral-400 block text-center -translate-x-1/2 -translate-y-1/2 left-1/2 top-10/12 animate-bounce duration-200 ease-in-out" />
+            </Box>
+            <Box>
+                <TextParallaxContentComponent />
             </Box>
             <Box className="">
                 <TimelineComponent />

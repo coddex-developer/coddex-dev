@@ -1,4 +1,6 @@
+import { MarqueeComponent } from "@/app/components/MarqueeComponent"
 import { StickyScrollComponent } from "@/app/components/StickyScrollComponent"
+import { TextGenerateEffectComponent } from "@/app/components/TextGenerateEffectComponent/intex"
 import { TextParallaxContentComponent } from "@/app/components/TextParallaxContentComponent"
 import TimelineComponent from "@/app/components/TimeLineComponent"
 import { ContainerTextFlip } from "@/app/components/ui/container-text-flip"
@@ -23,6 +25,21 @@ export default function HomePage() {
                     </Flex>
                 </Flex>
                 <ChevronDown size={35} className="absolute opacity-50 text-neutral-700 dark:text-neutral-400 block text-center -translate-x-1/2 -translate-y-1/2 left-1/2 top-10/12 animate-bounce duration-200 ease-in-out" />
+            </Box>
+            <Box>
+                <Flex className="flex-col items-center gap-10 md:text-base w-full py-10 md:py-32  rounded-lg px-4 md:px-8 lg:px-10">
+                <MarqueeComponent />
+                
+                <h2 className="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-4xl">
+                    <TextGenerateEffectComponent />
+                </h2>
+
+                <p className="text-neutral-700 dark:text-neutral-300 text-center text-sm md:text-base max-w-ld">
+                    Desde 2022 venho evoluindo continuamente na área de desenvolvimento de software,
+                    aprendendo novas tecnologias, construindo projetos reais e aprimorando minhas
+                    habilidades em Front-End, Back-End e desenvolvimento Full Stack.
+                </p>
+            </Flex>
             </Box>
             <Box>
                 <TextParallaxContentComponent />

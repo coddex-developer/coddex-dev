@@ -35,23 +35,10 @@ export function Timeline({ data }: { data: TimelineEntry[] }) {
 
     return (
         <div
-            className="w-full dark:bg-neutral-950 font-sans md:px-10"
+            className="w-full font-sans md:px-10"
             ref={containerRef}
         >
-            <div className="mx-auto flex flex-col gap-10 text-center md:text-base w-full py-5 md:py-8  rounded-lg px-2 md:px-8 lg:px-10">
-                <MarqueeComponent />
-                
-                <h2 className="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-4xl">
-                    <TextGenerateEffectComponent />
-                </h2>
-
-                <p className="text-neutral-700 dark:text-neutral-300 text-sm md:text-base max-w-ld">
-                    Desde 2022 venho evoluindo continuamente na área de desenvolvimento de software,
-                    aprendendo novas tecnologias, construindo projetos reais e aprimorando minhas
-                    habilidades em Front-End, Back-End e desenvolvimento Full Stack.
-                </p>
-            </div>
-
+            
             <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
                 {data.map((item, index) => (
                     <div

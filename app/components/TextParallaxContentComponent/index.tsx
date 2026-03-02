@@ -33,7 +33,7 @@ interface OverlayCopyProps {
 
 export const TextParallaxContentComponent: FC = () => {
   return (
-    <div className="bg-white">
+    <div className="">
       <TextParallaxContent
         imgUrl="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
         subheading="Collaborate"
@@ -173,12 +173,12 @@ const ExampleContent: FC = () => (
     </h2>
 
     <div className="col-span-1 md:col-span-8">
-      <p className="mb-4 text-xl text-neutral-600 md:text-2xl">
+      <p className="mb-4 text-xl  md:text-2xl">
         Lorem ipsum dolor sit amet consectetur
         adipisicing elit.
       </p>
 
-      <p className="mb-8 text-xl text-neutral-600 md:text-2xl">
+      <p className="mb-8 text-xl md:text-2xl">
         Accusantium reiciendis blanditiis aliquam.
       </p>
 

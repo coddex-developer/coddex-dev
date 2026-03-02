@@ -17,11 +17,11 @@ interface MagicCardProps {
 export function MagicCard({
   children,
   className,
-  gradientSize = 140, // 🔥 menor
-  gradientColor = "rgba(0,0,0,0.06)", // 🔥 super suave no light
-  gradientOpacity = 0.4, // 🔥 reduzido
-  gradientFrom = "rgba(158,122,255,0.25)", // 🔥 menos vibrante
-  gradientTo = "rgba(254,139,187,0.25)", // 🔥 menos vibrante
+  gradientSize = 140,
+  gradientColor = "rgba(0,0,0,0.06)",
+  gradientOpacity = 0.4, 
+  gradientFrom = "rgba(158,122,255,0.25)",
+  gradientTo = "rgba(254,139,187,0.25)",
 }: MagicCardProps) {
   const mouseX = useMotionValue(-gradientSize)
   const mouseY = useMotionValue(-gradientSize)
@@ -80,7 +80,7 @@ export function MagicCard({
             )
           `,
           opacity: gradientOpacity,
-          filter: "blur(10px)", // 🔥 deixa premium
+          filter: "blur(10px)",
         }}
       />
 

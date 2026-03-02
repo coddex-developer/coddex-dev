@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { DownloadCloud } from "lucide-react";
 import { MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle, Navbar, NavbarButton, NavbarLogo, NavBody, NavItems } from "../ui/resizable-navbar";
 import { useState } from "react";

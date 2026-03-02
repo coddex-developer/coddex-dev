@@ -1,11 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-import { IconFileAlert } from "@tabler/icons-react";
 import { FormComponent } from "../FormComponent";
 
+type isOpenProps = true | false
+
 const WrapperPopUpComponent = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState<isOpenProps>() || false;
     return (
         <>
             <InteractiveHoverButton onClick={() => setIsOpen(true)} >

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackgroundBeams } from "./components/ui/background-beams";
+import { IsOpenProvider } from "./contexts/isOpenContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,15 +31,17 @@ export default function RootLayout({
       <html lang="pt-BR">
         <body
           className={`${geistSans.variable} md:px-16  max-w-7xl mx-auto  ${geistMono.variable} antialiased`}>
-          {children}
+          <IsOpenProvider>
+            {children}
+          </IsOpenProvider>
           <div className="pointer-events-none fixed inset-0 z-50">
             <ProgressiveBlur
               height="5%"
               position="bottom"
             />
-            <ScrollProgress /> 
+            <ScrollProgress />
           </div>
-            <BackgroundBeams className="fixed pointer-events-none -z-10" />
+          <BackgroundBeams className="fixed pointer-events-none -z-10" />
         </body>
       </html>
     </>

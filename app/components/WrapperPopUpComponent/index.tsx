@@ -1,28 +1,25 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState, Dispatch, SetStateAction } from "react";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { FormComponent } from "../FormComponent";
-
-interface SpringModalProps {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-}
+import { useIsOpen } from "@/app/contexts/isOpenContext";
 
 const WrapperPopUpComponent = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { setIsOpen } = useIsOpen();
 
   return (
     <>
       <InteractiveHoverButton onClick={() => setIsOpen(true)}>
         Entrar em contato
       </InteractiveHoverButton>
-      
-      <SpringModalComponent isOpen={isOpen} setIsOpen={setIsOpen} />
+
+      <SpringModalComponent />
     </>
   );
 };
 
-const SpringModalComponent = ({ isOpen, setIsOpen }: SpringModalProps) => {
+const SpringModalComponent = () => {
+  const { isOpen, setIsOpen } = useIsOpen();
+
   return (
     <AnimatePresence>
       {isOpen && (

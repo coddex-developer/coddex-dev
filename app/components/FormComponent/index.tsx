@@ -14,8 +14,10 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { useIsOpen } from "@/app/contexts/isOpenContext"
 
 export function FormComponent() {
+    const { setIsOpen } = useIsOpen()
     return (
         <div className="relative flex items-center justify-center min-h-[100dvh] overflow-hidden">
 
@@ -67,7 +69,7 @@ export function FormComponent() {
                                     id="message"
                                     placeholder="Digite sua mensagem..."
                                     rows={5}
-                                    className="resize-none h-50"
+                                    className="resize-none h-30 lg:h-40"
                                 />
                             </div>
 
@@ -75,15 +77,15 @@ export function FormComponent() {
                     </CardContent>
 
                     <CardFooter className="border-t border-border grid gap-10 grid-cols-2 p-6">
-                        <Button variant={"outline"} type="button" className="w-full text-neutral-600 dark:text-neutral-200">
+                        <Button onClick={() => setIsOpen(false)} variant={"outline"} type="button" className="w-full text-neutral-600 dark:text-neutral-200">
                             Cancelar
                         </Button>
-                        <Button type="button" className="w-full bg-green-600 hover:bg-green-500 dark:text-neutral-100">
+                        <Button type="button" className="w-full bg-green-400 hover:bg-green-500 dark:text-neutral-100">
                             Enviar mensagem
                         </Button>
                     </CardFooter>
                 </MagicCard>
             </Card>
-        </div>
+        </div >
     )
 }

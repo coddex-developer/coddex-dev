@@ -15,7 +15,7 @@ export function ContactModalComponent() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 z-[90] bg-slate-950/45 backdrop-blur-md"
+          className="fixed inset-0 z-[90] bg-slate-950/45 backdrop-blur-sm"
         >
           <motion.div
             initial={{ scale: 0.92, y: 24, opacity: 0 }}
@@ -23,7 +23,7 @@ export function ContactModalComponent() {
             exit={{ scale: 0.92, y: 24, opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={(event) => event.stopPropagation()}
-            className="relative flex min-h-screen w-full items-center justify-center p-4"
+            className="relative flex min-h-screen w-full items-center justify-center p-3 sm:p-4"
           >
             <FormComponent />
           </motion.div>
@@ -32,4 +32,3 @@ export function ContactModalComponent() {
     </AnimatePresence>
   )
 }
-

@@ -18,8 +18,8 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
     <section className="mx-auto w-full max-w-6xl px-4 md:px-8">
       <div className="mb-10 text-center md:mb-14">
         <p className="text-xs uppercase tracking-[0.22em] text-cyan-500">Trajetoria</p>
-        <h2 className="text-3xl font-bold md:text-5xl">Linha do tempo profissional</h2>
-        <p className="mx-auto mt-3 max-w-2xl text-sm text-neutral-600 dark:text-neutral-300 md:text-base">
+        <h2 className="text-3xl font-bold text-foreground md:text-5xl">Linha do tempo profissional</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
           Evolucao continua com foco em engenharia, produto e experiencia de usuario.
         </p>
       </div>
@@ -44,7 +44,7 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
                 className="relative grid md:grid-cols-[1fr_auto_1fr] md:items-start"
               >
                 <div className={`pl-11 md:pl-0 ${isLeft ? "md:pr-8" : "md:col-start-3 md:pl-8"}`}>
-                  <div className="rounded-2xl border border-cyan-500/20 bg-gradient-to-b from-cyan-500/10 to-transparent p-4 backdrop-blur-sm md:p-5">
+                  <div className="rounded-2xl border border-cyan-500/20 bg-gradient-to-b from-cyan-500/10 to-transparent p-4 md:p-5">
                     <div className="mb-3 flex items-center justify-between gap-2">
                       <span className="rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium tracking-wide text-cyan-600 dark:text-cyan-200">
                         {item.year}
@@ -53,9 +53,9 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
                     </div>
 
                     <h3 className="mb-2 text-lg font-semibold md:text-xl">{item.title}</h3>
-                    <p className="mb-4 text-sm text-neutral-600 dark:text-neutral-300">{item.summary}</p>
+                    <p className="mb-4 text-sm text-muted-foreground">{item.summary}</p>
 
-                    <ul className="mb-4 space-y-2 text-sm text-neutral-600 dark:text-neutral-300">
+                    <ul className="mb-4 space-y-2 text-sm text-muted-foreground">
                       {item.bullets.map((bullet) => (
                         <li key={bullet} className="flex gap-2">
                           <span className="mt-1 block h-1.5 w-1.5 rounded-full bg-cyan-500" />
@@ -89,4 +89,3 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
     </section>
   )
 }
-

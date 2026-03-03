@@ -97,8 +97,8 @@ export function ProjectsSectionComponent() {
       <section id="projects" className="px-4 py-16 md:px-8 md:py-24">
         <div className="mb-10 flex flex-col gap-4 text-center md:mb-14">
           <p className="text-xs uppercase tracking-[0.25em] text-cyan-500">Portfolio Projects</p>
-          <h2 className="text-3xl font-bold md:text-5xl">Projetos pensados como produto</h2>
-          <p className="mx-auto max-w-2xl text-sm text-neutral-600 dark:text-neutral-300 md:text-base">
+          <h2 className="text-3xl font-bold text-foreground md:text-5xl">Projetos pensados como produto</h2>
+          <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
             Cada projeto combina design, engenharia e estrategia para gerar resultado real.
           </p>
         </div>
@@ -127,7 +127,7 @@ export function ProjectsSectionComponent() {
 
               <p className="mb-1 text-xs uppercase tracking-widest text-cyan-500">{project.category}</p>
               <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
-              <p className="mb-4 text-sm text-neutral-600 dark:text-neutral-300">{project.description}</p>
+              <p className="mb-4 text-sm text-muted-foreground">{project.description}</p>
 
               <div className="mb-5 flex flex-wrap gap-2">
                 {project.stack.map((tech) => (
@@ -182,7 +182,7 @@ export function ProjectsSectionComponent() {
                 </button>
               </div>
 
-              <p className="mb-5 text-sm text-neutral-600 dark:text-neutral-300">{selectedProject.description}</p>
+              <p className="mb-5 text-sm text-muted-foreground">{selectedProject.description}</p>
 
               <div className="relative mb-5 overflow-hidden rounded-xl border border-white/10">
                 <Image
@@ -237,7 +237,7 @@ export function ProjectsSectionComponent() {
 
               <div className="mb-6">
                 <h4 className="mb-2 text-sm font-semibold uppercase tracking-widest text-cyan-500">Destaques</h4>
-                <ul className="grid gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                <ul className="grid gap-2 text-sm text-muted-foreground">
                   {selectedProject.highlights.map((item) => (
                     <li key={item} className="rounded-lg border border-white/10 px-3 py-2">
                       {item}

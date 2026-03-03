@@ -56,11 +56,17 @@ export function FormComponent() {
     event.preventDefault()
     if (!canSubmit || loading) return
 
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
     try {
       setLoading(true)
       setStatus("idle")
+      const controller = new AbortController()
+      timeoutId = setTimeout(() => controller.abort(), 12000)
 
       const payload = {
+        _subject: `Novo contato portfolio: ${form.subject}`,
+        _replyto: form.email,
+        source: "portfolio-web",
         name: form.name,
         email: form.email,
         subject: form.subject,
@@ -84,6 +90,7 @@ export function FormComponent() {
           Accept: "application/json",
         },
         body: JSON.stringify(payload),
+        signal: controller.signal,
       })
 
       if (!response.ok) {
@@ -95,18 +102,19 @@ export function FormComponent() {
     } catch {
       setStatus("error")
     } finally {
+      if (timeoutId) clearTimeout(timeoutId)
       setLoading(false)
     }
   }
 
   return (
-    <Card className="w-full max-w-xl border-cyan-500/20 bg-card/85 p-0 backdrop-blur-2xl">
+    <Card className="w-full max-w-[min(92vw,640px)] border-cyan-500/20 bg-card/90 p-0">
       <CardHeader className="border-b border-border bg-background/60 p-6 text-center">
         <CardTitle className="text-2xl text-foreground">Entre em contato</CardTitle>
         <CardDescription>Envie uma mensagem e retornarei em breve.</CardDescription>
       </CardHeader>
 
-      <CardContent className="p-6">
+      <CardContent className="max-h-[78vh] overflow-y-auto p-4 sm:p-6">
         <form className="grid gap-4" onSubmit={onSubmit}>
           <div className="grid gap-2">
             <Label htmlFor="name">Nome</Label>
@@ -173,7 +181,7 @@ export function FormComponent() {
             </p>
           )}
 
-          <CardFooter className="mt-1 grid grid-cols-2 gap-4 border-t border-border bg-background/50 px-0 pt-5">
+          <CardFooter className="mt-1 grid grid-cols-1 gap-3 border-t border-border bg-background/50 px-0 pt-5 sm:grid-cols-2 sm:gap-4">
             <Button
               onClick={() => setIsOpen(false)}
               variant="outline"
@@ -195,4 +203,3 @@ export function FormComponent() {
     </Card>
   )
 }
-

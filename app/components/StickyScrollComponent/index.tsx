@@ -68,8 +68,8 @@ export function StickyScrollComponent() {
     <section ref={sectionRef} className="mx-auto w-full max-w-6xl px-4 md:px-8">
       <div className="mb-10 text-center md:mb-14">
         <p className="text-xs uppercase tracking-[0.22em] text-cyan-500">Servicos</p>
-        <h2 className="text-3xl font-bold md:text-5xl">Implementacao moderna e escalavel</h2>
-        <p className="mx-auto mt-3 max-w-2xl text-sm text-neutral-600 dark:text-neutral-300 md:text-base">
+        <h2 className="text-3xl font-bold text-foreground md:text-5xl">Implementacao moderna e escalavel</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
           Processo tecnico pensado para entregar valor hoje e facilitar evolucao com backend no futuro.
         </p>
       </div>
@@ -86,7 +86,7 @@ export function StickyScrollComponent() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 whileHover={{ y: -2, scale: 1.01 }}
-                className="rounded-2xl border border-cyan-500/20 bg-gradient-to-b from-cyan-500/10 to-transparent p-5 backdrop-blur-sm"
+                className="rounded-2xl border border-cyan-500/20 bg-gradient-to-b from-cyan-500/10 to-transparent p-5"
               >
                 <div className="mb-3 flex items-center gap-3">
                   <div className="rounded-lg border border-cyan-400/30 bg-cyan-500/15 p-2 text-cyan-600 dark:text-cyan-300">
@@ -95,7 +95,7 @@ export function StickyScrollComponent() {
                   <span className="text-xs uppercase tracking-[0.16em] text-cyan-500">{service.label}</span>
                 </div>
                 <h3 className="mb-2 text-lg font-semibold md:text-xl">{service.title}</h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-300">{service.description}</p>
+                <p className="text-sm text-muted-foreground">{service.description}</p>
               </motion.article>
             )
           })}
@@ -107,11 +107,11 @@ export function StickyScrollComponent() {
         >
           <p className="text-xs uppercase tracking-[0.2em] text-cyan-500">Roadmap tecnico</p>
           <h3 className="mt-3 text-2xl font-bold">Base pronta para backend</h3>
-          <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-300">
+          <p className="mt-3 text-sm text-muted-foreground">
             Componentes desacoplados, dados estruturados e URLs centralizadas em config para facilitar a integracao com API, CMS ou painel administrativo.
           </p>
 
-          <ul className="mt-6 space-y-2 text-sm text-neutral-600 dark:text-neutral-300">
+          <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
             <li className="rounded-lg border border-white/10 px-3 py-2">Separacao de conteudo em camada de dados</li>
             <li className="rounded-lg border border-white/10 px-3 py-2">Rotas de API previstas via variaveis de ambiente</li>
             <li className="rounded-lg border border-white/10 px-3 py-2">Padrao visual unico em dark e light mode</li>

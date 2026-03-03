@@ -57,6 +57,7 @@ export const BackgroundBeams = React.memo(
             "M-44 -573C-44 -573 24 -168 488 -41C952 86 1020 491 1020 491",
             "M-37 -581C-37 -581 31 -176 495 -49C959 78 1027 483 1027 483",
         ];
+        const optimizedPaths = paths.slice(0, 16);
         return (
             <div
                 className={cn(
@@ -79,7 +80,7 @@ export const BackgroundBeams = React.memo(
                         strokeWidth="0.5"
                     ></path>
 
-                    {paths.map((path, index) => (
+                    {optimizedPaths.map((path, index) => (
                         <motion.path
                             key={`path-` + index}
                             d={path}
@@ -89,7 +90,7 @@ export const BackgroundBeams = React.memo(
                         ></motion.path>
                     ))}
                     <defs>
-                        {paths.map((path, index) => (
+                        {optimizedPaths.map((path, index) => (
                             <motion.linearGradient
                                 id={`linearGradient-${index}`}
                                 key={`gradient-${index}`}
@@ -103,13 +104,13 @@ export const BackgroundBeams = React.memo(
                                     x1: ["0%", "100%"],
                                     x2: ["0%", "95%"],
                                     y1: ["0%", "100%"],
-                                    y2: ["0%", `${93 + Math.random() * 8}%`],
+                                    y2: ["0%", `${94 + (index % 5)}%`],
                                 }}
                                 transition={{
-                                    duration: Math.random() * 10 + 10,
+                                    duration: 12 + index * 0.35,
                                     ease: "easeInOut",
                                     repeat: Infinity,
-                                    delay: Math.random() * 10,
+                                    delay: index * 0.2,
                                 }}
                             >
                                 <stop stopColor="#18CCFC" stopOpacity="0"></stop>

@@ -62,7 +62,7 @@ export default function RootLayout({
             />
             <ScrollProgress />
           </div>
-          <BackgroundBeams className="fixed pointer-events-none -z-10" />
+          <BackgroundBeams className="pointer-events-none fixed -z-10 hidden md:block opacity-70" />
         </body>
       </html>
     </>

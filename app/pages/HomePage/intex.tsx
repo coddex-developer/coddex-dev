@@ -6,13 +6,28 @@ import WrapperPopUpComponent from "@/app/components/WrapperPopUpComponent"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { Box, Flex } from "@radix-ui/themes"
 import { ChevronDown, Layers3, Orbit, Rocket, ScanSearch } from "lucide-react"
-import { MarqueeComponent } from "@/app/components/MarqueeComponent"
-import { StickyScrollComponent } from "@/app/components/StickyScrollComponent"
-import TimelineComponent from "@/app/components/TimeLineComponent"
 import { FooterComponent } from "@/app/components/FooterComponent"
-import { ProjectsSectionComponent } from "@/app/components/ProjectsSectionComponent"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef } from "react"
+import { motion } from "framer-motion"
+import dynamic from "next/dynamic"
+
+const MarqueeComponent = dynamic(
+  () => import("@/app/components/MarqueeComponent").then((module) => module.MarqueeComponent),
+  { ssr: false }
+)
+const ProjectsSectionComponent = dynamic(
+  () =>
+    import("@/app/components/ProjectsSectionComponent").then(
+      (module) => module.ProjectsSectionComponent
+    ),
+  { ssr: false }
+)
+const StickyScrollComponent = dynamic(
+  () => import("@/app/components/StickyScrollComponent").then((module) => module.StickyScrollComponent),
+  { ssr: false }
+)
+const TimelineComponent = dynamic(() => import("@/app/components/TimeLineComponent"), {
+  ssr: false,
+})
 
 const pillars = [
   {
@@ -23,7 +38,7 @@ const pillars = [
   {
     icon: Orbit,
     title: "Interacao moderna",
-    text: "Animacoes fluidas, hierarquia visual e navegacao natural para aumentar engajamento.",
+    text: "Animacoes fluidas, hierarquia visual clara e navegacao natural para aumentar engajamento.",
   },
   {
     icon: Layers3,
@@ -39,7 +54,7 @@ const pillars = [
 
 const highlights = [
   { label: "Anos em evolucao", value: "4+" },
-  { label: "Projetos reais", value: "20+" },
+  { label: "Projetos entregues", value: "20+" },
   { label: "Stacks dominadas", value: "10+" },
 ]
 
@@ -47,46 +62,37 @@ function PillarCard({
   title,
   text,
   icon: Icon,
-  progress,
   index,
 }: {
   title: string
   text: string
   icon: typeof Rocket
-  progress: import("framer-motion").MotionValue<number>
   index: number
 }) {
-  const rotateX = useTransform(progress, [0, 1], [12 - index, -8])
-  const rotateY = useTransform(progress, [0, 1], [index % 2 === 0 ? -8 : 8, 0])
-  const y = useTransform(progress, [0, 1], [30 + index * 10, -30])
-
   return (
     <motion.article
-      style={{ rotateX, rotateY, y, transformPerspective: 1400 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.28, delay: index * 0.05 }}
       whileHover={{ scale: 1.02, rotateX: -4, rotateY: index % 2 === 0 ? 5 : -5 }}
-      className="rounded-2xl border border-cyan-500/20 bg-gradient-to-b from-cyan-500/10 to-transparent p-6 backdrop-blur-sm"
+      style={{ transformPerspective: 1200 }}
+      className="rounded-2xl border border-cyan-500/20 bg-gradient-to-b from-cyan-500/10 to-transparent p-6"
     >
       <Icon className="mb-4 text-cyan-400" size={22} />
       <h3 className="mb-2 text-xl font-semibold">{title}</h3>
-      <p className="text-sm text-neutral-600 dark:text-neutral-300">{text}</p>
+      <p className="text-sm text-muted-foreground">{text}</p>
     </motion.article>
   )
 }
 
 export default function HomePage() {
-  const cardsRef = useRef<HTMLDivElement | null>(null)
-  const { scrollYProgress } = useScroll({
-    target: cardsRef,
-    offset: ["start end", "end start"],
-  })
-  const titleY = useTransform(scrollYProgress, [0, 1], [40, -30])
-
   return (
     <>
       <Box className="relative w-full">
         <Flex justify={"center"} className="flex-col items-center h-screen">
           <BlurFade>
-            <p className="text-4xl md:text-7xl bg-clip-text text-transparent bg-linear-to-b from-neutral-400 dark:from-neutral-200 to-neutral-700 text-center font-sans font-bold">
+            <p className="text-4xl md:text-7xl bg-clip-text text-transparent bg-linear-to-b from-neutral-500 to-neutral-800 dark:from-neutral-200 dark:to-neutral-400 text-center font-sans font-bold">
               Gabriel Rodrigues
             </p>
           </BlurFade>
@@ -107,11 +113,11 @@ export default function HomePage() {
 
       <Box id="features" className="px-4 py-14 md:px-8 md:py-20">
         <Flex className="mb-10 flex-col items-center gap-3 text-center">
-          <h2 className="text-xl md:text-4xl text-black dark:text-white">
+          <h2 className="text-xl md:text-4xl text-foreground">
             <TextGenerateEffectComponent />
           </h2>
-          <p className="max-w-3xl text-sm text-neutral-700 dark:text-neutral-300 md:text-base">
-            Desenvolvimento de experiencias digitais com identidade forte, performance e arquitetura de longo prazo.
+          <p className="max-w-3xl text-sm text-muted-foreground md:text-base">
+            Desenvolvimento de experiencias digitais com identidade forte, performance consistente e arquitetura preparada para evolucao.
           </p>
         </Flex>
 
@@ -123,10 +129,10 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.3, delay: index * 0.08 }}
-              className="rounded-xl border border-white/15 bg-white/5 p-5 text-center backdrop-blur-sm"
+              className="rounded-xl border border-white/15 bg-white/5 p-5 text-center"
             >
               <p className="text-3xl font-bold text-cyan-500">{item.value}</p>
-              <p className="text-sm text-neutral-600 dark:text-neutral-300">{item.label}</p>
+              <p className="text-sm text-muted-foreground">{item.label}</p>
             </motion.div>
           ))}
         </div>
@@ -134,11 +140,17 @@ export default function HomePage() {
 
       <MarqueeComponent />
 
-      <div ref={cardsRef}>
+      <div>
         <Box className="px-4 py-14 md:px-8 md:py-24">
-          <motion.div style={{ y: titleY }} className="mb-10 text-center">
+          <motion.div
+            className="mb-10 text-center"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.28 }}
+          >
             <p className="text-xs uppercase tracking-[0.2em] text-cyan-500">Diferenciais</p>
-            <h2 className="text-3xl font-bold md:text-5xl">Secoes pensadas como produto</h2>
+            <h2 className="text-3xl font-bold text-foreground md:text-5xl">Secoes pensadas como produto</h2>
           </motion.div>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -148,7 +160,6 @@ export default function HomePage() {
                 title={pillar.title}
                 text={pillar.text}
                 icon={pillar.icon}
-                progress={scrollYProgress}
                 index={index}
               />
             ))}
@@ -175,8 +186,8 @@ export default function HomePage() {
         >
           <p className="mb-2 text-xs uppercase tracking-[0.25em] text-cyan-500">Next step</p>
           <h3 className="mb-3 text-2xl font-bold md:text-4xl">Vamos desenhar o proximo projeto juntos</h3>
-          <p className="mb-5 max-w-2xl text-sm text-neutral-600 dark:text-neutral-300 md:text-base">
-            Se voce precisa de um site institucional, landing page de conversao ou plataforma web completa, posso estruturar e implementar com foco em experiencia e resultado.
+          <p className="mb-5 max-w-2xl text-sm text-muted-foreground md:text-base">
+            Se voce precisa de um site institucional, landing page de conversao ou plataforma web completa, posso estruturar e implementar com foco em experiencia, performance e resultado.
           </p>
           <a
             href="#contact"

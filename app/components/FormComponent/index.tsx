@@ -170,7 +170,7 @@ export function FormComponent() {
   }
 
   return (
-    <Card className="w-full max-w-[min(92vw,640px)] h-dvh border-cyan-500/25 bg-card/95 p-0 shadow-[0_18px_60px_rgba(2,6,23,0.24)]">
+    <Card className="w-full max-w-[min(92vw,640px)] border-cyan-500/25 bg-card/95 p-0 shadow-[0_18px_60px_rgba(2,6,23,0.24)]">
       <CardHeader className="relative border-b border-border bg-background/70 px-5 pt-2 text-center sm:px-6">
         <button
           type="button"

@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { useIsOpen } from "@/app/contexts/isOpenContext"
 import { siteConfig } from "@/app/config/site"
+import { X } from "lucide-react"
 
 type FormData = {
   name: string
@@ -169,27 +170,35 @@ export function FormComponent() {
   }
 
   return (
-    <Card className="w-full max-w-[min(92vw,640px)] border-cyan-500/20 bg-card/90 p-0">
-      <CardHeader className="border-b border-border bg-background/60 p-6 text-center">
+    <Card className="w-full max-w-[min(92vw,640px)] h-dvh border-cyan-500/25 bg-card/95 p-0 shadow-[0_18px_60px_rgba(2,6,23,0.24)]">
+      <CardHeader className="relative border-b border-border bg-background/70 px-5 pt-2 text-center sm:px-6">
+        <button
+          type="button"
+          onClick={() => setIsOpen(false)}
+          className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-muted/40 text-muted-foreground transition hover:border-cyan-500/40 hover:text-cyan-600 dark:hover:text-cyan-200"
+          aria-label="Fechar formulario"
+        >
+          <X size={16} />
+        </button>
         <CardTitle className="text-2xl text-foreground">Entre em contato</CardTitle>
-        <CardDescription>Envie uma mensagem e retornarei em breve.</CardDescription>
+        <CardDescription className="mt-1">Envie uma mensagem e retornarei em breve.</CardDescription>
       </CardHeader>
 
-      <CardContent className="max-h-[78vh] overflow-y-auto p-4 sm:p-6">
-        <form className="grid gap-4" onSubmit={onSubmit}>
-          <div className="grid gap-2">
+      <CardContent className="max-h-[78vh] overflow-y-auto px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
+        <form className="grid gap-4 sm:gap-5" onSubmit={onSubmit}>
+          <div className="grid gap-2.5">
             <Label htmlFor="name">Nome</Label>
             <Input
               id="name"
               value={form.name}
               onChange={onChange("name")}
               placeholder="Seu nome completo"
-              className="text-foreground"
+              className="border-cyan-700/20 bg-white/80 text-foreground placeholder:text-muted-foreground/80 dark:bg-background/60"
               required
             />
           </div>
 
-          <div className="grid gap-2">
+          <div className="grid gap-2.5">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
@@ -197,12 +206,12 @@ export function FormComponent() {
               value={form.email}
               onChange={onChange("email")}
               placeholder="voce@empresa.com"
-              className="text-foreground"
+              className="border-cyan-700/20 bg-white/80 text-foreground placeholder:text-muted-foreground/80 dark:bg-background/60"
               required
             />
           </div>
 
-          <div className="grid gap-2">
+          <div className="grid gap-2.5">
             <Label htmlFor="whatsappNumber">WhatsApp</Label>
             <div className="grid grid-cols-[120px_1fr] gap-2">
               <select
@@ -211,7 +220,7 @@ export function FormComponent() {
                 onChange={(event) =>
                   setForm((prev) => ({ ...prev, whatsappDdd: event.target.value }))
                 }
-                className="h-10 rounded-md border border-input bg-background px-2 text-sm text-foreground"
+                className="h-10 rounded-md border border-cyan-700/20 bg-white/80 px-2 text-sm text-foreground dark:bg-background/60"
               >
                 {brazilDdds.map((ddd) => (
                   <option key={ddd} value={ddd}>
@@ -226,7 +235,7 @@ export function FormComponent() {
                 value={form.whatsappNumber}
                 onChange={onChange("whatsappNumber")}
                 placeholder="987654321"
-                className="text-foreground"
+                className="border-cyan-700/20 bg-white/80 text-foreground placeholder:text-muted-foreground/80 dark:bg-background/60"
                 required
               />
             </div>
@@ -240,19 +249,19 @@ export function FormComponent() {
             )}
           </div>
 
-          <div className="grid gap-2">
+          <div className="grid gap-2.5">
             <Label htmlFor="subject">Assunto</Label>
             <Input
               id="subject"
               value={form.subject}
               onChange={onChange("subject")}
               placeholder="Ex.: Landing page institucional"
-              className="text-foreground"
+              className="border-cyan-700/20 bg-white/80 text-foreground placeholder:text-muted-foreground/80 dark:bg-background/60"
               required
             />
           </div>
 
-          <div className="grid gap-2">
+          <div className="grid gap-2.5">
             <Label htmlFor="message">Mensagem</Label>
             <Textarea
               id="message"
@@ -260,7 +269,7 @@ export function FormComponent() {
               onChange={onChange("message")}
               placeholder="Descreva seu projeto, objetivo e prazo..."
               rows={6}
-              className="h-36 resize-none text-foreground"
+              className="h-36 resize-none border-cyan-700/20 bg-white/80 text-foreground placeholder:text-muted-foreground/80 dark:bg-background/60"
               required
             />
           </div>
@@ -283,15 +292,7 @@ export function FormComponent() {
             </p>
           )}
 
-          <CardFooter className="mt-1 grid grid-cols-1 gap-3 border-t border-border bg-background/50 px-0 pt-5 sm:grid-cols-2 sm:gap-4">
-            <Button
-              onClick={() => setIsOpen(false)}
-              variant="outline"
-              type="button"
-              className="w-full cursor-pointer text-neutral-600 transition duration-200 hover:-translate-y-0.5 hover:text-cyan-600 dark:text-neutral-200 dark:hover:text-cyan-200"
-            >
-              Fechar
-            </Button>
+          <CardFooter className="mt-1 grid grid-cols-1 gap-3 border-t border-border bg-background/50 px-0 pt-5">
             <Button
               type="submit"
               disabled={!canSubmit || loading}

@@ -5,6 +5,7 @@ import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackgroundBeams } from "./components/ui/background-beams";
 import { IsOpenProvider } from "./contexts/isOpenContext";
+import { ThemeContextProvider } from "./contexts/ThemeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +30,26 @@ export default function RootLayout({
   return (
     <>
       <html lang="pt-BR">
+        <head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+          (function() {
+            const saved = localStorage.getItem("theme");
+            if (saved === "dark") {
+              document.documentElement.classList.add("dark");
+            }
+          })();
+        `,
+            }}
+          />
+        </head>
         <body
           className={`${geistSans.variable} md:px-16  max-w-7xl mx-auto  ${geistMono.variable} antialiased`}>
           <IsOpenProvider>
-            {children}
+            <ThemeContextProvider>
+              {children}
+            </ThemeContextProvider>
           </IsOpenProvider>
           <div className="pointer-events-none fixed inset-0 z-50">
             <ProgressiveBlur

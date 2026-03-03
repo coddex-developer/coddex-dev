@@ -1,64 +1,198 @@
 "use client"
 
+import { useMemo, useState } from "react"
 import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-    CardDescription,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardDescription,
 } from "@/components/ui/card"
-
-import { MagicCard } from "@/components/ui/magic-card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { useIsOpen } from "@/app/contexts/isOpenContext"
+import { siteConfig } from "@/app/config/site"
+
+type FormData = {
+  name: string
+  email: string
+  subject: string
+  message: string
+}
+
+const initialForm: FormData = {
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+}
 
 export function FormComponent() {
-    const { setIsOpen } = useIsOpen()
-    return (
-        <>
-            <Card className="w-sm md:w-lg lg:max-w-xl backdrop-blur-4xl p-0">
-                <CardHeader className="border-b dark:bg-gray-900/60 border-border p-6 text-center">
-                    <CardTitle className="text-2xl dark:dark:text-neutral-200">
-                        Entre em contato
-                    </CardTitle>
+  const { setIsOpen } = useIsOpen()
+  const [form, setForm] = useState<FormData>(initialForm)
+  const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
 
-                    <CardDescription>
-                        Envie uma mensagem e retornarei em breve
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <form className="grid gap-5">
-                        <div className="grid gap-2">
-                            <Label className="dark:text-neutral-200" htmlFor="name">Nome</Label>
-                            <Input
-                                id="name"
-                                placeholder="Seu nome"
-                                className="dark:text-neutral-200" />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label className="dark:text-neutral-200" htmlFor="message">Mensagem</Label>
-                            <Textarea
-                                id="message"
-                                placeholder="Digite sua mensagem..."
-                                rows={5}
-                                className="resize-none h-30 lg:h-40 dark:text-neutral-200"
-                            />
-                        </div>
-                    </form>
-                </CardContent>
-                <CardFooter className="border-t dark:bg-gray-900/60 border-border grid gap-7 md:gap-10 grid-cols-2 p-6">
-                    <Button onClick={() => setIsOpen(false)} variant={"outline"} type="button" className=" hover:-translate-y-0.5 hover:text-neutral-600 transition duration-200 cursor-pointer w-full text-neutral-600 dark:dark:text-neutral-200">
-                        Cancelar
-                    </Button>
-                    <Button type="button" className="hover:-translate-y-0.5 transition duration-200 cursor-pointer w-full bg-green-600 dark:bg-slate-600 hover:bg-green-500 dark:hover:bg-slate-500 dark:text-neutral-100">
-                        Enviar mensagem
-                    </Button>
-                </CardFooter>
-            </Card>
-        </>
-    )
+  const canSubmit = useMemo(
+    () =>
+      form.name.trim().length > 2 &&
+      form.email.includes("@") &&
+      form.subject.trim().length > 2 &&
+      form.message.trim().length > 10,
+    [form]
+  )
+
+  const onChange =
+    (field: keyof FormData) =>
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setForm((prev) => ({ ...prev, [field]: event.target.value }))
+      if (status !== "idle") setStatus("idle")
+    }
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!canSubmit || loading) return
+
+    try {
+      setLoading(true)
+      setStatus("idle")
+
+      const payload = {
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: [
+          `Nome: ${form.name}`,
+          `Email: ${form.email}`,
+          `Assunto: ${form.subject}`,
+          "",
+          "Mensagem:",
+          form.message,
+          "",
+          `Origem: ${window.location.href}`,
+          `Data: ${new Date().toISOString()}`,
+        ].join("\n"),
+      }
+
+      const response = await fetch(siteConfig.forms.formspreeEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        throw new Error("Falha ao enviar")
+      }
+
+      setStatus("success")
+      setForm(initialForm)
+    } catch {
+      setStatus("error")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <Card className="w-full max-w-xl border-cyan-500/20 bg-card/85 p-0 backdrop-blur-2xl">
+      <CardHeader className="border-b border-border bg-background/60 p-6 text-center">
+        <CardTitle className="text-2xl text-foreground">Entre em contato</CardTitle>
+        <CardDescription>Envie uma mensagem e retornarei em breve.</CardDescription>
+      </CardHeader>
+
+      <CardContent className="p-6">
+        <form className="grid gap-4" onSubmit={onSubmit}>
+          <div className="grid gap-2">
+            <Label htmlFor="name">Nome</Label>
+            <Input
+              id="name"
+              value={form.name}
+              onChange={onChange("name")}
+              placeholder="Seu nome completo"
+              className="text-foreground"
+              required
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={form.email}
+              onChange={onChange("email")}
+              placeholder="voce@empresa.com"
+              className="text-foreground"
+              required
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="subject">Assunto</Label>
+            <Input
+              id="subject"
+              value={form.subject}
+              onChange={onChange("subject")}
+              placeholder="Ex.: Landing page institucional"
+              className="text-foreground"
+              required
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="message">Mensagem</Label>
+            <Textarea
+              id="message"
+              value={form.message}
+              onChange={onChange("message")}
+              placeholder="Descreva seu projeto, objetivo e prazo..."
+              rows={6}
+              className="h-36 resize-none text-foreground"
+              required
+            />
+          </div>
+
+          <div className="text-xs text-neutral-500">
+            Contato alternativo: <span className="text-cyan-600 dark:text-cyan-300">{siteConfig.contactEmail}</span>
+          </div>
+
+          {status === "success" && (
+            <p className="rounded-md border border-emerald-400/40 bg-emerald-400/10 px-3 py-2 text-xs text-emerald-600 dark:text-emerald-300">
+              Mensagem enviada com sucesso.
+            </p>
+          )}
+          {status === "error" && (
+            <p className="rounded-md border border-red-400/40 bg-red-400/10 px-3 py-2 text-xs text-red-600 dark:text-red-300">
+              Nao foi possivel enviar agora. Tente novamente em instantes.
+            </p>
+          )}
+
+          <CardFooter className="mt-1 grid grid-cols-2 gap-4 border-t border-border bg-background/50 px-0 pt-5">
+            <Button
+              onClick={() => setIsOpen(false)}
+              variant="outline"
+              type="button"
+              className="w-full cursor-pointer text-neutral-600 transition duration-200 hover:-translate-y-0.5 hover:text-cyan-600 dark:text-neutral-200 dark:hover:text-cyan-200"
+            >
+              Fechar
+            </Button>
+            <Button
+              type="submit"
+              disabled={!canSubmit || loading}
+              className="w-full cursor-pointer bg-cyan-500 text-white transition duration-200 hover:-translate-y-0.5 hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {loading ? "Enviando..." : "Enviar mensagem"}
+            </Button>
+          </CardFooter>
+        </form>
+      </CardContent>
+    </Card>
+  )
 }
+

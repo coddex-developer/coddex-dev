@@ -1,5 +1,3 @@
-import { ArrowRight } from "lucide-react"
-
 import { cn } from "@/lib/utils"
 import { SiWhatsapp } from "@icons-pack/react-simple-icons"
 
@@ -11,13 +9,13 @@ export function InteractiveHoverButton({
   return (
     <button
       className={cn(
-        "group bg-background relative w-auto cursor-pointer overflow-hidden rounded-full border text-neutral-700 dark:text-neutral-400 border-green-400 dark:border-neutral-400 p-2 px-6 text-center font-semibold",
+        "group relative w-auto cursor-pointer overflow-hidden rounded-full border border-cyan-400/50 bg-background p-2 px-6 text-center font-semibold text-neutral-700 dark:text-neutral-200",
         className
       )}
       {...props}
     >
       <div className="flex items-center justify-center gap-2">
-        <div className="bg-green-400 h-2 w-2 rounded-full transition-all duration-300 group-hover:scale-[100.8]"></div>
+        <div className="h-2 w-2 rounded-full bg-cyan-400 transition-all duration-300 group-hover:scale-[100.8]"></div>
         <span className="inline-block transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0">
           {children}
         </span>

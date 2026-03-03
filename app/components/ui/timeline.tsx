@@ -1,82 +1,92 @@
-"use client";
-import {
-    useScroll,
-    useTransform,
-    motion,
-} from "motion/react";
-import React, { useEffect, useRef, useState } from "react";
-import { TextGenerateEffectComponent } from "../TextGenerateEffectComponent/intex";
-import { MarqueeComponent } from "../MarqueeComponent";
+"use client"
 
-interface TimelineEntry {
-    title: string;
-    content: React.ReactNode;
+import Image from "next/image"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef } from "react"
+import type { TimelineItem } from "@/app/data/timeline"
+
+export function Timeline({ items }: { items: TimelineItem[] }) {
+  const trackRef = useRef<HTMLDivElement | null>(null)
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start 75%", "end 25%"],
+  })
+
+  const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1])
+
+  return (
+    <section className="mx-auto w-full max-w-6xl px-4 md:px-8">
+      <div className="mb-10 text-center md:mb-14">
+        <p className="text-xs uppercase tracking-[0.22em] text-cyan-500">Trajetoria</p>
+        <h2 className="text-3xl font-bold md:text-5xl">Linha do tempo profissional</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-sm text-neutral-600 dark:text-neutral-300 md:text-base">
+          Evolucao continua com foco em engenharia, produto e experiencia de usuario.
+        </p>
+      </div>
+
+      <div ref={trackRef} className="relative pb-2">
+        <div className="absolute left-4 top-0 h-full w-px bg-neutral-300/70 dark:bg-neutral-700/70 md:left-1/2 md:-translate-x-1/2" />
+        <motion.div
+          style={{ scaleY: lineScale, transformOrigin: "top" }}
+          className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-cyan-400 via-cyan-500 to-transparent md:left-1/2 md:-translate-x-1/2"
+        />
+
+        <div className="space-y-8 md:space-y-12">
+          {items.map((item, index) => {
+            const isLeft = index % 2 === 0
+            return (
+              <motion.article
+                key={`${item.year}-${item.title}`}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.35 }}
+                className="relative grid md:grid-cols-[1fr_auto_1fr] md:items-start"
+              >
+                <div className={`pl-11 md:pl-0 ${isLeft ? "md:pr-8" : "md:col-start-3 md:pl-8"}`}>
+                  <div className="rounded-2xl border border-cyan-500/20 bg-gradient-to-b from-cyan-500/10 to-transparent p-4 backdrop-blur-sm md:p-5">
+                    <div className="mb-3 flex items-center justify-between gap-2">
+                      <span className="rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium tracking-wide text-cyan-600 dark:text-cyan-200">
+                        {item.year}
+                      </span>
+                      <span className="text-xs uppercase tracking-wider text-neutral-500">Milestone</span>
+                    </div>
+
+                    <h3 className="mb-2 text-lg font-semibold md:text-xl">{item.title}</h3>
+                    <p className="mb-4 text-sm text-neutral-600 dark:text-neutral-300">{item.summary}</p>
+
+                    <ul className="mb-4 space-y-2 text-sm text-neutral-600 dark:text-neutral-300">
+                      {item.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-2">
+                          <span className="mt-1 block h-1.5 w-1.5 rounded-full bg-cyan-500" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="overflow-hidden rounded-xl border border-white/10">
+                      <Image
+                        src={item.image}
+                        alt={item.imageAlt}
+                        width={1000}
+                        height={600}
+                        className="h-40 w-full object-cover md:h-48"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute left-4 top-6 z-10 -translate-x-1/2 md:static md:left-auto md:top-auto md:col-start-2 md:translate-x-0">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-cyan-400/40 bg-background shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                    <div className="h-2.5 w-2.5 rounded-full bg-cyan-500" />
+                  </div>
+                </div>
+              </motion.article>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
 }
 
-export function Timeline({ data }: { data: TimelineEntry[] }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [height, setHeight] = useState(0);
-
-    useEffect(() => {
-        if (ref.current) {
-            const rect = ref.current.getBoundingClientRect();
-            setHeight(rect.height);
-        }
-    }, [ref]);
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start 10%", "end 50%"],
-    });
-
-    const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-    const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
-
-    return (
-        <div
-            className="w-full font-sans md:px-10"
-            ref={containerRef}
-        >
-            
-            <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
-                {data.map((item, index) => (
-                    <div
-                        key={index}
-                        className="flex justify-start pt-10 md:pt-40 md:gap-10"
-                    >
-                        <div className="sticky flex flex-col md:flex-row z-10 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-                            <div className="w-8 h-8 absolute left-3 md:left-3  rounded-full bg-white shadow-neutral-700/30 shadow-xl dark:bg-black flex items-center justify-center">
-                                <div className="w-4 h-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
-                            </div>
-                            <h3 className="hidden md:block text-xl md:pl-20 md:text-3xl font-bold text-neutral-500 dark:text-neutral-500 ">
-                                {item.title}
-                            </h3>
-                        </div>
-
-                        <div className="relative pl-20 pr-4 md:pl-4 w-full">
-                            <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-neutral-500 dark:text-neutral-500">
-                                {item.title}
-                            </h3>
-                            {item.content}{" "}
-                        </div>
-                    </div>
-                ))}
-                <div
-                    style={{
-                        height: height + "px",
-                    }}
-                    className="absolute md:left-7 left-7 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] "
-                >
-                    <motion.div
-                        style={{
-                            height: heightTransform,
-                            opacity: opacityTransform,
-                        }}
-                        className="absolute inset-x-0 top-0  w-[2px] bg-gradient-to-t from-purple-500 via-blue-500 to-transparent from-0% via-10% rounded-full"
-                    />
-                </div>
-            </div>
-        </div>
-    );
-};

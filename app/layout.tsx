@@ -6,6 +6,8 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackgroundBeams } from "./components/ui/background-beams";
 import { IsOpenProvider } from "./contexts/isOpenContext";
 import { ThemeContextProvider } from "./contexts/ThemeContext";
+import { WhatsAppFloatComponent } from "./components/WhatsAppFloatComponent";
+import { ContactModalComponent } from "./components/ContactModalComponent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,10 +47,12 @@ export default function RootLayout({
           />
         </head>
         <body
-          className={`${geistSans.variable} md:px-16  max-w-7xl mx-auto  ${geistMono.variable} antialiased`}>
+          className={`${geistSans.variable} ${geistMono.variable} mx-auto w-full max-w-7xl px-4 antialiased sm:px-6 lg:px-10`}>
           <IsOpenProvider>
             <ThemeContextProvider>
               {children}
+              <ContactModalComponent />
+              <WhatsAppFloatComponent />
             </ThemeContextProvider>
           </IsOpenProvider>
           <div className="pointer-events-none fixed inset-0 z-50">

@@ -3,6 +3,7 @@ import { DownloadCloud } from "lucide-react";
 import { MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle, Navbar, NavbarButton, NavbarLogo, NavBody, NavItems } from "../ui/resizable-navbar";
 import { useState } from "react";
 import { AnimatedThemeToggler } from "../ui/AnimatedThemeToggler";
+import { siteConfig } from "@/app/config/site";
 
 interface TextItemsProps {
   name: string
@@ -19,7 +20,11 @@ export function NavbarMenuComponent() {
     },
     {
       name: "Projetos",
-      link: "#pricing",
+      link: "#projects",
+    },
+    {
+      name: "Jornada",
+      link: "#journey",
     },
     {
       name: "Contato",
@@ -32,25 +37,27 @@ export function NavbarMenuComponent() {
   return (
     <div className="relative w-full">
       <Navbar>
-        {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
-          <div className="flex items-center gap-7">
+          <div className="flex items-center gap-4">
             <AnimatedThemeToggler />
-            <NavbarButton className="text-black/80 flex gap-1 items-center" variant="primary"><DownloadCloud /> Download Cv</NavbarButton>
+            <NavbarButton href={siteConfig.links.cv} target="_blank" rel="noreferrer" className="flex items-center gap-1" variant="primary">
+              <DownloadCloud size={16} /> Download CV
+            </NavbarButton>
           </div>
         </NavBody>
 
-        {/* Mobile Navigation */}
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
-            <AnimatedThemeToggler />
-            <MobileNavToggle
-              isOpen={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            />
+            <div className="flex items-center gap-2">
+              <AnimatedThemeToggler />
+              <MobileNavToggle
+                isOpen={isMobileMenuOpen}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              />
+            </div>
           </MobileNavHeader>
 
           <MobileNavMenu
@@ -58,30 +65,30 @@ export function NavbarMenuComponent() {
             onClose={() => setIsMobileMenuOpen(false)}
           >
             {navItems.map((item, idx) => (
-              <>
-                <a
-                  key={`mobile-link-${idx}`}
-                  href={item.link}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="relative text-neutral-600 dark:text-neutral-50"
-                >
-                  <span className="block">{item.name}</span>
-                </a>
-              </>
+              <a
+                key={`mobile-link-${idx}`}
+                href={item.link}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="rounded-md px-2 py-1 text-sm text-neutral-700 transition hover:bg-cyan-500/10 hover:text-cyan-700 dark:text-neutral-200 dark:hover:text-cyan-200"
+              >
+                <span className="block">{item.name}</span>
+              </a>
             ))}
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
+                href={siteConfig.links.cv}
+                target="_blank"
+                rel="noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
-                className="w-full flex gap-1 items-center justify-center dark:bg-neutral-700 dark:text-neutral-50 text-black/80"
+                className="w-full justify-center gap-1"
               >
-                <DownloadCloud /> Download Cv
+                <DownloadCloud size={16} /> Download CV
               </NavbarButton>
             </div>
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-      {/* Navbar */}
     </div>
-  );
+  )
 }

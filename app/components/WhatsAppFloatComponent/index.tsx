@@ -38,7 +38,7 @@ export function WhatsAppFloatComponent() {
       initial={{ opacity: 0, scale: 0.85, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       whileHover={{ y: -4, scale: 1.04 }}
-      className="fixed bottom-6 right-6 z-[85] inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500 px-4 py-3 text-sm font-semibold text-white shadow-[0_0_30px_rgba(6,182,212,0.45)]"
+      className="fixed bottom-6 right-6 z-[85] inline-flex h-12 w-12 items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-500 text-white shadow-[0_0_30px_rgba(6,182,212,0.45)]"
       aria-label="Abrir contato rapido"
     >
       <motion.span
@@ -47,7 +47,6 @@ export function WhatsAppFloatComponent() {
         transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
       />
       <MessageCircleMore size={18} className="relative z-10" />
-      <span className="relative z-10">WhatsApp</span>
     </motion.button>
   )
 }

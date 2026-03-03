@@ -18,7 +18,8 @@ export const timelineItems: TimelineItem[] = [
       "Compreensao de estrutura web",
       "Primeiros projetos funcionais",
     ],
-    image: "/skills/html5andJs.png",
+    image:
+      "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80",
     imageAlt: "Fundamentos web",
   },
   {
@@ -31,7 +32,8 @@ export const timelineItems: TimelineItem[] = [
       "Consumo e integracao de APIs",
       "Organizacao por componentes",
     ],
-    image: "/skills/nextAndReact.png",
+    image:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80",
     imageAlt: "Projetos com React",
   },
   {
@@ -44,7 +46,8 @@ export const timelineItems: TimelineItem[] = [
       "Renderizacao hibrida no Next.js",
       "TailwindCSS para UI responsiva",
     ],
-    image: "/skills/jsAndTs.png",
+    image:
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1400&q=80",
     imageAlt: "Especializacao front-end",
   },
   {
@@ -57,7 +60,8 @@ export const timelineItems: TimelineItem[] = [
       "Tipagem forte com TypeScript",
       "Integracao de ponta a ponta",
     ],
-    image: "/skills/jsAndTs.png",
+    image:
+      "https://images.unsplash.com/photo-1526378800651-c32d170fe6f8?auto=format&fit=crop&w=1400&q=80",
     imageAlt: "Evolucao full stack",
   },
   {
@@ -70,8 +74,8 @@ export const timelineItems: TimelineItem[] = [
       "Animacoes e interacoes modernas",
       "Performance e qualidade visual",
     ],
-    image: "/skills/nextAndReact.png",
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
     imageAlt: "Consolidacao profissional",
   },
 ]
-

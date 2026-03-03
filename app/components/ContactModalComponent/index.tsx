@@ -3,9 +3,19 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { FormComponent } from "../FormComponent"
 import { useIsOpen } from "@/app/contexts/isOpenContext"
+import { useEffect } from "react"
 
 export function ContactModalComponent() {
   const { isOpen, setIsOpen } = useIsOpen()
+
+  useEffect(() => {
+    if (!isOpen) return
+    const previous = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.body.style.overflow = previous
+    }
+  }, [isOpen])
 
   return (
     <AnimatePresence>

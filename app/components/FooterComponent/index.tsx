@@ -1,34 +1,67 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
-import { Github, Instagram, Linkedin, Mail, Sparkles } from "lucide-react";
+import { Github, Instagram, Linkedin, Mail, Sparkles, MessageCircleMore, Youtube, AtSign, Music2, Palette, Dribbble } from "lucide-react";
 import { siteConfig } from "@/app/config/site";
 
-const links = [
-  {
+const contactMap = {
+  email: {
     href: `mailto:${siteConfig.contactEmail}`,
     label: "Email",
     icon: Mail,
   },
-  {
+  linkedin: {
     href: siteConfig.links.linkedin,
     label: "LinkedIn",
     icon: Linkedin,
   },
-  {
+  github: {
     href: siteConfig.links.github,
     label: "GitHub",
     icon: Github,
   },
-  {
+  instagram: {
     href: siteConfig.links.instagram,
     label: "Instagram",
     icon: Instagram,
   },
-];
+  whatsapp: {
+    href: siteConfig.links.whatsapp,
+    label: "WhatsApp",
+    icon: MessageCircleMore,
+  },
+  youtube: {
+    href: siteConfig.links.youtube,
+    label: "YouTube",
+    icon: Youtube,
+  },
+  x: {
+    href: siteConfig.links.x,
+    label: "X",
+    icon: AtSign,
+  },
+  tiktok: {
+    href: siteConfig.links.tiktok,
+    label: "TikTok",
+    icon: Music2,
+  },
+  behance: {
+    href: siteConfig.links.behance,
+    label: "Behance",
+    icon: Palette,
+  },
+  dribbble: {
+    href: siteConfig.links.dribbble,
+    label: "Dribbble",
+    icon: Dribbble,
+  },
+} as const;
 
 export function FooterComponent() {
   const year = new Date().getFullYear();
+  const links = siteConfig.contactChannels
+    .map((channel) => contactMap[channel as keyof typeof contactMap])
+    .filter((item) => item && item.href)
   const sections = [
     { label: "Sobre", href: "#features" },
     { label: "Projetos", href: "#projects" },

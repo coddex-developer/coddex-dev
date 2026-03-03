@@ -28,6 +28,10 @@ const StickyScrollComponent = dynamic(
 const TimelineComponent = dynamic(() => import("@/app/components/TimeLineComponent"), {
   ssr: false,
 })
+const FaqComponent = dynamic(
+  () => import("@/app/components/FaqComponent").then((module) => module.FaqComponent),
+  { ssr: false }
+)
 
 const pillars = [
   {
@@ -176,6 +180,8 @@ export default function HomePage() {
       <Box id="journey" className="py-10 md:py-16">
         <TimelineComponent />
       </Box>
+
+      <FaqComponent />
 
       <Box className="px-4 pb-6 md:px-8">
         <motion.section

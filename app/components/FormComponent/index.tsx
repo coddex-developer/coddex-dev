@@ -19,6 +19,8 @@ import { siteConfig } from "@/app/config/site"
 type FormData = {
   name: string
   email: string
+  whatsappDdd: string
+  whatsappNumber: string
   subject: string
   message: string
 }
@@ -26,8 +28,52 @@ type FormData = {
 const initialForm: FormData = {
   name: "",
   email: "",
+  whatsappDdd: "11",
+  whatsappNumber: "",
   subject: "",
   message: "",
+}
+
+const brazilDdds = [
+  "11", "12", "13", "14", "15", "16", "17", "18", "19",
+  "21", "22", "24", "27", "28",
+  "31", "32", "33", "34", "35", "37", "38",
+  "41", "42", "43", "44", "45", "46",
+  "47", "48", "49",
+  "51", "53", "54", "55",
+  "61", "62", "64", "63", "65", "66", "67", "68", "69",
+  "71", "73", "74", "75", "77", "79",
+  "81", "82", "83", "84", "85", "86", "87", "88", "89",
+  "91", "92", "93", "94", "95", "96", "97", "98", "99",
+]
+
+const genericNumbers = new Set([
+  "000000000",
+  "111111111",
+  "222222222",
+  "333333333",
+  "444444444",
+  "555555555",
+  "666666666",
+  "777777777",
+  "888888888",
+  "999999999",
+  "123456789",
+  "987654321",
+])
+
+function toDigits(value: string) {
+  return value.replace(/\D/g, "")
+}
+
+function isValidWhatsapp(ddd: string, number: string) {
+  const phone = toDigits(number)
+  if (!brazilDdds.includes(ddd)) return false
+  if (phone.length !== 9) return false
+  if (phone[0] !== "9") return false
+  if (genericNumbers.has(phone)) return false
+  if (/^(\d)\1+$/.test(phone)) return false
+  return true
 }
 
 export function FormComponent() {
@@ -35,25 +81,37 @@ export function FormComponent() {
   const [form, setForm] = useState<FormData>(initialForm)
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+  const [triedSubmit, setTriedSubmit] = useState(false)
+
+  const whatsappIsValid = useMemo(
+    () => isValidWhatsapp(form.whatsappDdd, form.whatsappNumber),
+    [form.whatsappDdd, form.whatsappNumber]
+  )
 
   const canSubmit = useMemo(
     () =>
       form.name.trim().length > 2 &&
       form.email.includes("@") &&
+      whatsappIsValid &&
       form.subject.trim().length > 2 &&
       form.message.trim().length > 10,
-    [form]
+    [form, whatsappIsValid]
   )
 
   const onChange =
     (field: keyof FormData) =>
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setForm((prev) => ({ ...prev, [field]: event.target.value }))
+      let value = event.target.value
+      if (field === "whatsappNumber") {
+        value = toDigits(value).slice(0, 9)
+      }
+      setForm((prev) => ({ ...prev, [field]: value }))
       if (status !== "idle") setStatus("idle")
     }
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setTriedSubmit(true)
     if (!canSubmit || loading) return
 
     let timeoutId: ReturnType<typeof setTimeout> | null = null
@@ -69,10 +127,12 @@ export function FormComponent() {
         source: "portfolio-web",
         name: form.name,
         email: form.email,
+        whatsapp: `+55 (${form.whatsappDdd}) ${form.whatsappNumber}`,
         subject: form.subject,
         message: [
           `Nome: ${form.name}`,
           `Email: ${form.email}`,
+          `WhatsApp: +55 (${form.whatsappDdd}) ${form.whatsappNumber}`,
           `Assunto: ${form.subject}`,
           "",
           "Mensagem:",
@@ -99,6 +159,7 @@ export function FormComponent() {
 
       setStatus("success")
       setForm(initialForm)
+      setTriedSubmit(false)
     } catch {
       setStatus("error")
     } finally {
@@ -142,6 +203,44 @@ export function FormComponent() {
           </div>
 
           <div className="grid gap-2">
+            <Label htmlFor="whatsappNumber">WhatsApp</Label>
+            <div className="grid grid-cols-[120px_1fr] gap-2">
+              <select
+                id="whatsappDdd"
+                value={form.whatsappDdd}
+                onChange={(event) =>
+                  setForm((prev) => ({ ...prev, whatsappDdd: event.target.value }))
+                }
+                className="h-10 rounded-md border border-input bg-background px-2 text-sm text-foreground"
+              >
+                {brazilDdds.map((ddd) => (
+                  <option key={ddd} value={ddd}>
+                    +55 ({ddd})
+                  </option>
+                ))}
+              </select>
+              <Input
+                id="whatsappNumber"
+                type="tel"
+                inputMode="numeric"
+                value={form.whatsappNumber}
+                onChange={onChange("whatsappNumber")}
+                placeholder="987654321"
+                className="text-foreground"
+                required
+              />
+            </div>
+            <p className="text-[11px] text-muted-foreground">
+              Use apenas numeros no contato. Exemplo: 987654321
+            </p>
+            {(triedSubmit || form.whatsappNumber.length > 0) && !whatsappIsValid && (
+              <p className="rounded-md border border-red-500/50 bg-red-500/15 px-3 py-2 text-xs font-medium text-red-700 dark:text-red-300">
+                Numero de WhatsApp invalido. Use DDD brasileiro e um numero real de 9 digitos.
+              </p>
+            )}
+          </div>
+
+          <div className="grid gap-2">
             <Label htmlFor="subject">Assunto</Label>
             <Input
               id="subject"
@@ -171,12 +270,15 @@ export function FormComponent() {
           </div>
 
           {status === "success" && (
-            <p className="rounded-md border border-emerald-400/40 bg-emerald-400/10 px-3 py-2 text-xs text-emerald-600 dark:text-emerald-300">
-              Mensagem enviada com sucesso.
-            </p>
+            <div className="rounded-md border border-emerald-400/50 bg-emerald-400/15 px-3 py-3 text-sm text-emerald-800 dark:text-emerald-300">
+              <p className="font-semibold">Mensagem enviada com sucesso.</p>
+              <p className="mt-1 font-medium">
+                Obrigado pelo contato. Vou responder no seu WhatsApp ou email em breve com os proximos passos.
+              </p>
+            </div>
           )}
           {status === "error" && (
-            <p className="rounded-md border border-red-400/40 bg-red-400/10 px-3 py-2 text-xs text-red-600 dark:text-red-300">
+            <p className="rounded-md border border-red-500/50 bg-red-500/15 px-3 py-2 text-sm font-semibold text-red-700 dark:text-red-300">
               Nao foi possivel enviar agora. Tente novamente em instantes.
             </p>
           )}

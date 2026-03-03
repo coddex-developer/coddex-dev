@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import { ExternalLink, Github, X, ChevronLeft, ChevronRight } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { siteConfig } from "@/app/config/site"
 
 type Project = {
@@ -31,7 +31,11 @@ const projects: Project[] = [
       "Indicadores e graficos em tempo real",
       "Fluxo responsivo para desktop e mobile",
     ],
-    images: ["/skills/nextAndReact.png", "/skills/jsAndTs.png", "/skills/html5andJs.png"],
+    images: [
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1551281044-8c2bf8fbc95c?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1400&q=80",
+    ],
     liveUrl: siteConfig.projects.nexusLive,
     repoUrl: siteConfig.projects.nexusRepo,
   },
@@ -47,7 +51,10 @@ const projects: Project[] = [
       "Checkout simplificado",
       "Integracao com APIs de pagamento",
     ],
-    images: ["/skills/ChatGPT Image 1 de mar. de 2026, 01_10_56.png"],
+    images: [
+      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1400&q=80",
+    ],
     liveUrl: siteConfig.projects.auroraLive,
     repoUrl: siteConfig.projects.auroraRepo,
   },
@@ -63,7 +70,10 @@ const projects: Project[] = [
       "Monitoramento de disponibilidade",
       "Controle de acesso por perfis",
     ],
-    images: ["/skills/jsAndTs.png", "/skills/nextAndReact.png"],
+    images: [
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1400&q=80",
+    ],
     liveUrl: siteConfig.projects.pulseLive,
     repoUrl: siteConfig.projects.pulseRepo,
   },
@@ -72,6 +82,15 @@ const projects: Project[] = [
 export function ProjectsSectionComponent() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [imageIndex, setImageIndex] = useState(0)
+
+  useEffect(() => {
+    if (!selectedProject) return
+    const previous = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.body.style.overflow = previous
+    }
+  }, [selectedProject])
 
   const openProject = (project: Project) => {
     setSelectedProject(project)

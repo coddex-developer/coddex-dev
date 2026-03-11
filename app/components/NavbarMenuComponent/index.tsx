@@ -99,7 +99,7 @@ export function NavbarMenuComponent() {
                 href={siteConfig.links.cv || "#"}
                 target="_blank"
                 rel="noreferrer"
-                onClick={(ev) => {
+                onClick={(ev: React.MouseEvent<HTMLAnchorElement>) => {
                   handleDownload(ev)
                   setIsMobileMenuOpen(false)
                 }}

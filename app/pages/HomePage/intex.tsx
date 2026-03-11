@@ -57,8 +57,8 @@ const pillars = [
 ]
 
 const highlights = [
-  { label: "Anos em evolucao", value: "4+" },
-  { label: "Projetos entregues", value: "20+" },
+  { label: "Anos em evolução", value: "2+" },
+  { label: "Projetos entregues", value: "3+" },
   { label: "Stacks dominadas", value: "10+" },
 ]
 

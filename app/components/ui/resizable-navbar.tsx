@@ -177,7 +177,7 @@ export const NavbarLogo = () => {
     <a href="#" className="relative z-20 mr-2 flex items-center gap-2 px-1 py-1">
       <Image src="/logo-coddex.png" alt="logo" className="w-11" width={1080} height={1080} />
       <span className="text-base font-semibold text-foreground sm:text-lg">
-        Codde<span className="text-cyan-500">X</span> Developer
+        Codde<span className="text-green-500">X</span> Developer
       </span>
     </a>
   )

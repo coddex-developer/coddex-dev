@@ -24,7 +24,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "CoddeX Developer",
-  description: "Olá, eu sou Gabriel Rodrigues — Vamos construir sua presença digital juntos?",
+  description: "Vamos construir sua presença digital juntos?",
 };
 
 export default function RootLayout({

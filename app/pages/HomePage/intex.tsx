@@ -41,18 +41,18 @@ const pillars = [
   },
   {
     icon: Orbit,
-    title: "Interacao moderna",
-    text: "Animacoes fluidas, hierarquia visual clara e navegacao natural para aumentar engajamento.",
+    title: "Interação moderna",
+    text: "Animações fluidas, hierarquia visual clara e navegação natural para aumentar engajamento.",
   },
   {
     icon: Layers3,
     title: "Escalabilidade real",
-    text: "Codigo limpo, padroes reutilizaveis e arquitetura preparada para crescer.",
+    text: "Código limpo, padrões reutilizaveis e arquitetura preparada para crescer.",
   },
   {
     icon: ScanSearch,
     title: "Leitura de produto",
-    text: "Antes de codar, alinhamento de contexto, usuario e estrategia de implementacao.",
+    text: "Antes de codar, alinhamento de contexto, usuário e estrategia de implementação.",
   },
 ]
 

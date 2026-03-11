@@ -33,27 +33,27 @@ interface OverlayCopyProps {
 
 export const TextParallaxContentComponent: FC = () => {
   return (
-    <div className="">
+    <div>
       <TextParallaxContent
         imgUrl="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-        subheading="Collaborate"
-        heading="Built for all of us."
+        subheading="Colaboração"
+        heading="Construído para todos nós."
       >
         <ExampleContent />
       </TextParallaxContent>
 
       <TextParallaxContent
         imgUrl="https://images.unsplash.com/photo-1530893609608-32a9af3aa95c"
-        subheading="Quality"
-        heading="Never compromise."
+        subheading="Qualidade"
+        heading="Nunca comprometa a qualidade."
       >
         <ExampleContent />
       </TextParallaxContent>
 
       <TextParallaxContent
         imgUrl="https://images.unsplash.com/photo-1504610926078-a1611febcad3"
-        subheading="Modern"
-        heading="Dress for the best."
+        subheading="Moderno"
+        heading="Projetado para o melhor."
       >
         <ExampleContent />
       </TextParallaxContent>
@@ -169,21 +169,23 @@ const OverlayCopy: FC<OverlayCopyProps> = ({
 const ExampleContent: FC = () => (
   <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
     <h2 className="col-span-1 text-3xl font-bold md:col-span-4">
-      Additional content explaining the above card
+      Conteúdo adicional explicando a seção acima
     </h2>
 
     <div className="col-span-1 md:col-span-8">
-      <p className="mb-4 text-xl  md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur
-        adipisicing elit.
+      <p className="mb-4 text-xl md:text-2xl">
+        Este espaço pode ser usado para apresentar
+        detalhes, contexto ou informações
+        complementares sobre o conteúdo exibido.
       </p>
 
       <p className="mb-8 text-xl md:text-2xl">
-        Accusantium reiciendis blanditiis aliquam.
+        Estruture explicações claras para reforçar
+        o valor apresentado anteriormente.
       </p>
 
       <button className="flex items-center gap-2 rounded bg-neutral-900 px-9 py-4 text-xl text-white transition hover:bg-neutral-700">
-        Learn more
+        Saiba mais
         <CircleFadingArrowUp />
       </button>
     </div>

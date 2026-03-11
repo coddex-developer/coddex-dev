@@ -10,6 +10,7 @@ import { WhatsAppFloatComponent } from "./components/WhatsAppFloatComponent";
 import { ContactModalComponent } from "./components/ContactModalComponent";
 import { CookieNoticeComponent } from "./components/CookieNoticeComponent";
 import { SiteLoaderComponent } from "./components/SiteLoaderComponent";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,6 +68,11 @@ export default function RootLayout({
             <ScrollProgress />
           </div>
           <BackgroundBeams className="pointer-events-none fixed -z-10 hidden md:block opacity-70" />
+          <Toaster
+            position="top-center"
+            richColors
+            expand
+          />
         </body>
       </html>
     </>

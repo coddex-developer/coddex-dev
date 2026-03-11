@@ -1,38 +1,45 @@
 "use client"
-import { DownloadCloud } from "lucide-react";
-import { MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle, Navbar, NavbarButton, NavbarLogo, NavBody, NavItems } from "../ui/resizable-navbar";
-import { useState } from "react";
-import { AnimatedThemeToggler } from "../ui/AnimatedThemeToggler";
-import { siteConfig } from "@/app/config/site";
+
+import { DownloadCloud } from "lucide-react"
+import {
+  MobileNav,
+  MobileNavHeader,
+  MobileNavMenu,
+  MobileNavToggle,
+  Navbar,
+  NavbarButton,
+  NavbarLogo,
+  NavBody,
+  NavItems,
+} from "../ui/resizable-navbar"
+
+import { useState } from "react"
+import { AnimatedThemeToggler } from "../ui/AnimatedThemeToggler"
+import { siteConfig } from "@/app/config/site"
+import { toast } from "sonner"
 
 interface TextItemsProps {
   name: string
   link: string
 }
 
-
-
 export function NavbarMenuComponent() {
   const navItems: TextItemsProps[] = [
-    {
-      name: "Sobre",
-      link: "#features",
-    },
-    {
-      name: "Projetos",
-      link: "#projects",
-    },
-    {
-      name: "Jornada",
-      link: "#journey",
-    },
-    {
-      name: "Contato",
-      link: "#contact",
-    }
-  ];
+    { name: "Sobre", link: "#features" },
+    { name: "Projetos", link: "#projects" },
+    { name: "Jornada", link: "#journey" },
+    { name: "Contato", link: "#contact" },
+  ]
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  function handleDownload(ev: React.MouseEvent<HTMLAnchorElement>) {
+      ev.preventDefault()
+      toast.warning("CV indisponível", {
+        description: "O currículo ainda não foi disponibilizado para download.",
+      })
+    
+  }
 
   return (
     <div className="relative w-full">
@@ -40,10 +47,20 @@ export function NavbarMenuComponent() {
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
+
           <div className="flex items-center gap-4">
             <AnimatedThemeToggler />
-            <NavbarButton href={siteConfig.links.cv} target="_blank" rel="noreferrer" className="flex items-center gap-1" variant="primary">
-              <DownloadCloud size={16} /> Download CV
+
+            <NavbarButton
+              // href={siteConfig.links.cv || "#"}
+              href={"#"}
+              rel="noreferrer"
+              onClick={handleDownload}
+              className="flex items-center gap-1"
+              variant="primary"
+            >
+              <DownloadCloud size={16} />
+              Download CV
             </NavbarButton>
           </div>
         </NavBody>
@@ -51,8 +68,10 @@ export function NavbarMenuComponent() {
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
+
             <div className="flex items-center gap-2">
               <AnimatedThemeToggler />
+
               <MobileNavToggle
                 isOpen={isMobileMenuOpen}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -74,16 +93,21 @@ export function NavbarMenuComponent() {
                 <span className="block">{item.name}</span>
               </a>
             ))}
+
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
-                href={siteConfig.links.cv}
+                href={siteConfig.links.cv || "#"}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(ev) => {
+                  handleDownload(ev)
+                  setIsMobileMenuOpen(false)
+                }}
                 variant="primary"
                 className="w-full justify-center gap-1"
               >
-                <DownloadCloud size={16} /> Download CV
+                <DownloadCloud size={16} />
+                Download CV
               </NavbarButton>
             </div>
           </MobileNavMenu>

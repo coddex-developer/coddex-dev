@@ -14,44 +14,44 @@ import { useRef } from "react"
 const services = [
   {
     icon: IconRocket,
-    title: "Front-End com foco em conversao",
+    title: "Front-End com foco em conversão",
     description:
       "Interfaces modernas, responsivas e objetivas para transformar visitas em contatos e vendas.",
     label: "UI Engineering",
   },
   {
     icon: IconDatabase,
-    title: "Integracao de APIs com consistencia",
+    title: "Integração de APIs com consistência",
     description:
-      "Conexao segura entre front e back-end com padrao de dados pronto para escalar.",
+      "Conexão segura entre front e back-end com padrão de dados pronto para escalar.",
     label: "API Integration",
   },
   {
     icon: IconLayersDifference,
-    title: "Arquitetura limpa e reutilizavel",
+    title: "Arquitetura limpa e reutilizável",
     description:
-      "Componentes padronizados para acelerar evolucao do produto sem perder qualidade.",
+      "Componentes padronizados para acelerar a evolução do produto sem perder qualidade.",
     label: "Clean Architecture",
   },
   {
     icon: IconGauge,
-    title: "Performance e experiencia fluida",
+    title: "Performance e experiência fluida",
     description:
-      "Aprimoramento de carregamento, renderizacao e animacoes para manter a experiencia leve.",
+      "Aprimoramento de carregamento, renderização e animações para manter a experiência leve.",
     label: "Performance First",
   },
   {
     icon: IconFileCode2,
     title: "Entrega Full Stack",
     description:
-      "Implementacao ponta a ponta com base pronta para futuras integracoes e novos modulos.",
+      "Implementação ponta a ponta com base pronta para futuras integrações e novos módulos.",
     label: "Full Stack Delivery",
   },
   {
     icon: IconBriefcase,
-    title: "Visao de negocio aplicada",
+    title: "Visão de negócio aplicada",
     description:
-      "Solucoes orientadas por objetivo, funil e posicionamento da sua marca no digital.",
+      "Soluções orientadas por objetivo, funil e posicionamento da sua marca no digital.",
     label: "Business Impact",
   },
 ]
@@ -67,10 +67,10 @@ export function StickyScrollComponent() {
   return (
     <section ref={sectionRef} className="mx-auto w-full max-w-6xl px-4 md:px-8">
       <div className="mb-10 text-center md:mb-14">
-        <p className="text-xs uppercase tracking-[0.22em] text-cyan-500">Servicos</p>
-        <h2 className="text-3xl font-bold text-foreground md:text-5xl">Implementacao moderna e escalavel</h2>
+        <p className="text-xs uppercase tracking-[0.22em] text-cyan-500">Serviços</p>
+        <h2 className="text-3xl font-bold text-foreground md:text-5xl">Implementação moderna e escalável</h2>
         <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
-          Processo tecnico pensado para entregar valor hoje e facilitar evolucao com backend no futuro.
+          Processo técnico pensado para entregar valor hoje e facilitar a evolução com backend no futuro.
         </p>
       </div>
 
@@ -105,16 +105,22 @@ export function StickyScrollComponent() {
           style={{ y: previewY }}
           className="sticky top-24 hidden h-fit rounded-3xl border border-cyan-500/25 bg-gradient-to-b from-cyan-500/20 via-cyan-500/10 to-transparent p-6 shadow-[0_0_45px_rgba(6,182,212,0.16)] lg:block"
         >
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-500">Roadmap tecnico</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-cyan-500">Roadmap técnico</p>
           <h3 className="mt-3 text-2xl font-bold">Base pronta para backend</h3>
           <p className="mt-3 text-sm text-muted-foreground">
-            Componentes desacoplados, dados estruturados e URLs centralizadas em config para facilitar a integracao com API, CMS ou painel administrativo.
+            Componentes desacoplados, dados estruturados e URLs centralizadas em config para facilitar a integração com API, CMS ou painel administrativo.
           </p>
 
           <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
-            <li className="rounded-lg border border-white/10 px-3 py-2">Separacao de conteudo em camada de dados</li>
-            <li className="rounded-lg border border-white/10 px-3 py-2">Rotas de API previstas via variaveis de ambiente</li>
-            <li className="rounded-lg border border-white/10 px-3 py-2">Padrao visual unico em dark e light mode</li>
+            <li className="rounded-lg border border-white/10 px-3 py-2">
+              Separação de conteúdo em camada de dados
+            </li>
+            <li className="rounded-lg border border-white/10 px-3 py-2">
+              Rotas de API previstas via variáveis de ambiente
+            </li>
+            <li className="rounded-lg border border-white/10 px-3 py-2">
+              Padrão visual único em dark e light mode
+            </li>
           </ul>
         </motion.aside>
       </div>

@@ -6,19 +6,19 @@ import { ChevronDown } from "lucide-react"
 
 const faqItems = [
   {
-    question: "Qual tipo de projeto voce desenvolve?",
+    question: "Qual tipo de projeto voçê desenvolve?",
     answer:
-      "Landing pages, sites institucionais, dashboards e aplicacoes web completas com foco em performance e conversao.",
+      "Landing pages, sites institucionais, dashboards e aplicacoes web completas com foco em performance e conversão.",
   },
   {
     question: "Como funciona o processo de trabalho?",
     answer:
-      "Comecamos com alinhamento de objetivo e escopo, depois wireframe/estrutura, desenvolvimento e validacao final com ajustes.",
+      "Começamos com alinhamento de objetivo e escopo, depois wireframe/estrutura, desenvolvimento e validação final com ajustes.",
   },
   {
-    question: "Voce integra com backend ou API existente?",
+    question: "Voçê integra com backend ou API existente?",
     answer:
-      "Sim. A estrutura atual ja foi preparada para integrar APIs, autenticacao e painel administrativo de forma escalavel.",
+      "Sim. A estrutura atual ja foi preparada para integrar APIs, autenticação e painel administrativo de forma escalavel.",
   },
   {
     question: "Em quanto tempo um projeto costuma ficar pronto?",
@@ -36,7 +36,7 @@ export function FaqComponent() {
         <p className="text-xs uppercase tracking-[0.22em] text-cyan-500">FAQ</p>
         <h2 className="text-3xl font-bold text-foreground md:text-5xl">Perguntas frequentes</h2>
         <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
-          Respostas diretas para acelerar decisao e inicio do projeto.
+          Respostas diretas para acelerar decisão e início do projeto.
         </p>
       </div>
 

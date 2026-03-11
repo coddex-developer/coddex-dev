@@ -10,72 +10,67 @@ export type TimelineItem = {
 export const timelineItems: TimelineItem[] = [
   {
     year: "2022",
-    title: "Inicio da jornada",
+    title: "Início da jornada",
     summary:
-      "Comecei os estudos em programacao com foco em logica, fundamentos web e construcao de interfaces com HTML, CSS e JavaScript.",
+      "Comecei meus estudos em programação focando em lógica, fundamentos da web e criação de interfaces utilizando HTML, CSS e JavaScript.",
     bullets: [
-      "Base tecnica de desenvolvimento",
-      "Compreensao de estrutura web",
+      "Base de desenvolvimento web",
+      "Entendimento da estrutura das aplicações",
       "Primeiros projetos funcionais",
     ],
-    image:
-      "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80",
+    image: "/timeline-images/img01.png",
     imageAlt: "Fundamentos web",
   },
   {
     year: "2023",
     title: "Primeiros projetos reais",
     summary:
-      "Passei para projetos completos, organizacao com Git e consumo de APIs REST em fluxo de front-end e back-end.",
+      "Passei a desenvolver projetos mais completos, utilizando Git para versionamento e integrando APIs REST em aplicações web.",
     bullets: [
-      "Versionamento e fluxo Git",
-      "Consumo e integracao de APIs",
-      "Organizacao por componentes",
+      "Controle de versão com Git",
+      "Consumo e integração de APIs",
+      "Organização de código por componentes",
     ],
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80",
+    image: "/timeline-images/img02.png",
     imageAlt: "Projetos com React",
   },
   {
     year: "2024",
-    title: "Especializacao Front-End",
+    title: "Especialização Front-End",
     summary:
-      "Aprofundei em React e Next.js, com foco em performance, responsividade e experiencia visual moderna.",
+      "Aprofundei meus conhecimentos em React e Next.js, trabalhando com interfaces modernas, responsividade e boas práticas de desenvolvimento.",
     bullets: [
-      "Arquitetura em React",
-      "Renderizacao hibrida no Next.js",
-      "TailwindCSS para UI responsiva",
+      "Estrutura de aplicações com React",
+      "Renderização híbrida no Next.js",
+      "Interfaces responsivas com Tailwind CSS",
     ],
-    image:
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Especializacao front-end",
+    image: "/timeline-images/img03.png",
+    imageAlt: "Especialização front-end",
   },
   {
     year: "2025",
-    title: "Evolucao Full Stack",
+    title: "Evolução Full Stack",
     summary:
-      "Ampliei para desenvolvimento full stack, criando APIs, regras de negocio e persistencia de dados com TypeScript.",
+      "Ampliei meus estudos para o desenvolvimento full stack, criando APIs, implementando regras de negócio e trabalhando com persistência de dados em TypeScript.",
     bullets: [
-      "APIs REST e CRUD completo",
-      "Tipagem forte com TypeScript",
-      "Integracao de ponta a ponta",
+      "Criação de APIs REST",
+      "Tipagem com TypeScript",
+      "Integração entre front-end e back-end",
     ],
-    image:
-      "https://images.unsplash.com/photo-1526378800651-c32d170fe6f8?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Evolucao full stack",
+    image: "/timeline-images/img04.png",
+    imageAlt: "Evolução full stack",
   },
   {
     year: "2026",
-    title: "Consolidacao profissional",
+    title: "Consolidação profissional",
     summary:
-      "Foco em produtos digitais com arquitetura limpa, identidade visual forte e experiencia orientada a resultado.",
+      "Foco no desenvolvimento de produtos digitais com organização de código, interfaces bem estruturadas e atenção à experiência do usuário.",
     bullets: [
-      "Arquitetura escalavel",
-      "Animacoes e interacoes modernas",
+      "Arquitetura de projetos escalável",
+      "Interações e animações modernas",
       "Performance e qualidade visual",
     ],
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Consolidacao profissional",
+    image: "/timeline-images/img05.png",
+    imageAlt: "Consolidação profissional",
   },
 ]

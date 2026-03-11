@@ -20,7 +20,7 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
         <p className="text-xs uppercase tracking-[0.22em] text-cyan-500">Trajetoria</p>
         <h2 className="text-3xl font-bold text-foreground md:text-5xl">Linha do tempo profissional</h2>
         <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
-          Evolucao continua com foco em engenharia, produto e experiencia de usuario.
+          Evolução continua com foco em engenharia, produto e experiência de usuario.
         </p>
       </div>
 

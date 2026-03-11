@@ -59,15 +59,17 @@ const contactMap = {
 
 export function FooterComponent() {
   const year = new Date().getFullYear();
+
   const links = siteConfig.contactChannels
     .map((channel) => contactMap[channel as keyof typeof contactMap])
-    .filter((item) => item && item.href)
+    .filter((item) => item && item.href);
+
   const sections = [
     { label: "Sobre", href: "#features" },
     { label: "Projetos", href: "#projects" },
     { label: "Jornada", href: "#journey" },
     { label: "Contato", href: "#contact" },
-  ]
+  ];
 
   return (
     <footer className="relative mt-20 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-cyan-500/10 via-background to-background px-6 py-12 md:px-10">
@@ -81,11 +83,11 @@ export function FooterComponent() {
           </p>
 
           <h3 className="text-2xl font-bold leading-tight md:text-4xl">
-            Vamos construir uma experiencia digital de alto impacto.
+            Vamos construir uma experiência digital de alto impacto.
           </h3>
 
           <p className="max-w-md text-sm text-neutral-600 dark:text-neutral-300">
-            Interfaces modernas, animacoes fluidas e codigo escalavel para transformar ideias em produto.
+            Interfaces modernas, animações fluidas e código escalável para transformar ideias em produto.
           </p>
 
           <div className="flex flex-wrap gap-2 pt-1">
@@ -104,6 +106,7 @@ export function FooterComponent() {
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:justify-items-end">
           {links.map((item) => {
             const Icon = item.icon;
+
             return (
               <motion.a
                 key={item.label}

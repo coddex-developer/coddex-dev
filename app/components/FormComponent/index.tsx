@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import {
   Card,
   CardContent,
@@ -15,7 +15,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { useIsOpen } from "@/app/contexts/isOpenContext"
 import { siteConfig } from "@/app/config/site"
-import { X } from "lucide-react"
+import { X, Send } from "lucide-react"
+import { toast } from "sonner"
 
 type FormData = {
   name: string
@@ -36,16 +37,16 @@ const initialForm: FormData = {
 }
 
 const brazilDdds = [
-  "11", "12", "13", "14", "15", "16", "17", "18", "19",
-  "21", "22", "24", "27", "28",
-  "31", "32", "33", "34", "35", "37", "38",
-  "41", "42", "43", "44", "45", "46",
-  "47", "48", "49",
-  "51", "53", "54", "55",
-  "61", "62", "64", "63", "65", "66", "67", "68", "69",
-  "71", "73", "74", "75", "77", "79",
-  "81", "82", "83", "84", "85", "86", "87", "88", "89",
-  "91", "92", "93", "94", "95", "96", "97", "98", "99",
+  "11","12","13","14","15","16","17","18","19",
+  "21","22","24","27","28",
+  "31","32","33","34","35","37","38",
+  "41","42","43","44","45","46",
+  "47","48","49",
+  "51","53","54","55",
+  "61","62","63","64","65","66","67","68","69",
+  "71","73","74","75","77","79",
+  "81","82","83","84","85","86","87","88","89",
+  "91","92","93","94","95","96","97","98","99",
 ]
 
 const genericNumbers = new Set([
@@ -67,22 +68,61 @@ function toDigits(value: string) {
   return value.replace(/\D/g, "")
 }
 
+function formatWhatsapp(value: string) {
+  const digits = value.replace(/\D/g, "").slice(0, 9)
+
+  if (!digits) return ""
+  if (digits.length <= 1) return digits
+  if (digits.length <= 5) return `${digits[0]} ${digits.slice(1)}`
+  return `${digits[0]} ${digits.slice(1,5)}-${digits.slice(5)}`
+}
+
 function isValidWhatsapp(ddd: string, number: string) {
   const phone = toDigits(number)
+
   if (!brazilDdds.includes(ddd)) return false
   if (phone.length !== 9) return false
   if (phone[0] !== "9") return false
   if (genericNumbers.has(phone)) return false
   if (/^(\d)\1+$/.test(phone)) return false
+
   return true
 }
 
 export function FormComponent() {
-  const { setIsOpen } = useIsOpen()
+  const { isOpen, setIsOpen } = useIsOpen()
+  const formRef = useRef<HTMLFormElement | null>(null)
+
   const [form, setForm] = useState<FormData>(initialForm)
   const [loading, setLoading] = useState(false)
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
   const [triedSubmit, setTriedSubmit] = useState(false)
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    const syncFromDom = () => {
+      const formEl = formRef.current
+      if (!formEl) return
+
+      const data = new FormData(formEl)
+      const next: FormData = {
+        name: String(data.get("name") ?? ""),
+        email: String(data.get("email") ?? ""),
+        whatsappDdd: String(data.get("whatsappDdd") ?? "11"),
+        whatsappNumber: String(data.get("whatsappNumber") ?? ""),
+        subject: String(data.get("subject") ?? ""),
+        message: String(data.get("message") ?? ""),
+      }
+
+      setForm((prev) => {
+        if (JSON.stringify(prev) === JSON.stringify(next)) return prev
+        return next
+      })
+    }
+
+    const rafId = requestAnimationFrame(syncFromDom)
+    return () => cancelAnimationFrame(rafId)
+  }, [isOpen])
 
   const whatsappIsValid = useMemo(
     () => isValidWhatsapp(form.whatsappDdd, form.whatsappNumber),
@@ -102,28 +142,34 @@ export function FormComponent() {
   const onChange =
     (field: keyof FormData) =>
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
       let value = event.target.value
+
       if (field === "whatsappNumber") {
-        value = toDigits(value).slice(0, 9)
+        value = formatWhatsapp(value)
       }
+
       setForm((prev) => ({ ...prev, [field]: value }))
-      if (status !== "idle") setStatus("idle")
     }
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+
     event.preventDefault()
     setTriedSubmit(true)
+
     if (!canSubmit || loading) return
 
     let timeoutId: ReturnType<typeof setTimeout> | null = null
+
     try {
+
       setLoading(true)
-      setStatus("idle")
+
       const controller = new AbortController()
       timeoutId = setTimeout(() => controller.abort(), 12000)
 
       const payload = {
-        _subject: `Novo contato portfolio: ${form.subject}`,
+        _subject: `Novo contato portfólio: ${form.subject}`,
         _replyto: form.email,
         source: "portfolio-web",
         name: form.name,
@@ -154,15 +200,25 @@ export function FormComponent() {
         signal: controller.signal,
       })
 
-      if (!response.ok) {
-        throw new Error("Falha ao enviar")
-      }
+      if (!response.ok) throw new Error()
 
-      setStatus("success")
+      toast.success("Mensagem enviada com sucesso!", {
+        description: "Responderei em breve pelo WhatsApp ou email.",
+      })
+
       setForm(initialForm)
       setTriedSubmit(false)
+
+      setTimeout(() => {
+        setIsOpen(false)
+      }, 1500)
+
     } catch {
-      setStatus("error")
+
+      toast.error("Falha ao enviar mensagem", {
+        description: "Tente novamente em alguns instantes.",
+      })
+
     } finally {
       if (timeoutId) clearTimeout(timeoutId)
       setLoading(false)
@@ -170,30 +226,56 @@ export function FormComponent() {
   }
 
   return (
-    <Card className="w-full max-w-[min(92vw,640px)] border-cyan-500/25 bg-card/95 p-0 shadow-[0_18px_60px_rgba(2,6,23,0.24)]">
-      <CardHeader className="relative border-b border-border bg-background/70 px-5 pt-2 text-center sm:px-6">
-        <button
+    <Card className="w-full max-w-[min(95vw,640px)] sm:max-w-[520px] md:max-w-[640px] border-cyan-500/25 bg-card/95 shadow-[0_18px_60px_rgba(2,6,23,0.24)]">
+
+      <CardHeader className="relative border-b border-border bg-background/70 px-5 pt-4 text-center sm:px-6">
+
+        <Button
           type="button"
+          aria-label="Fechar formulário de contato"
           onClick={() => setIsOpen(false)}
-          className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-muted/40 text-muted-foreground transition hover:border-cyan-500/40 hover:text-cyan-600 dark:hover:text-cyan-200"
-          aria-label="Fechar formulario"
+          className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-muted/40 text-muted-foreground hover:border-cyan-500/40 hover:text-cyan-600"
         >
           <X size={16} />
-        </button>
-        <CardTitle className="text-2xl text-foreground">Entre em contato</CardTitle>
-        <CardDescription className="mt-1">Envie uma mensagem e retornarei em breve.</CardDescription>
+        </Button>
+
+        <CardTitle className="text-2xl">
+          Entre em contato
+        </CardTitle>
+
+        <CardDescription>
+          Envie uma mensagem e retornarei em breve.
+        </CardDescription>
+
       </CardHeader>
 
       <CardContent className="max-h-[78vh] overflow-y-auto px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
-        <form className="grid gap-4 sm:gap-5" onSubmit={onSubmit}>
+
+        <form
+          className="grid gap-4 sm:gap-5"
+          onSubmit={onSubmit}
+          aria-label="Formulário de contato"
+          ref={formRef}
+        >
+
+          {/* honeypot anti spam */}
+          <input
+            type="text"
+            name="company"
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+
           <div className="grid gap-2.5">
             <Label htmlFor="name">Nome</Label>
             <Input
               id="name"
+              name="name"
+              autoComplete="name"
               value={form.name}
               onChange={onChange("name")}
               placeholder="Seu nome completo"
-              className="border-cyan-700/20 bg-white/80 text-foreground placeholder:text-muted-foreground/80 dark:bg-background/60"
               required
             />
           </div>
@@ -202,25 +284,28 @@ export function FormComponent() {
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
+              name="email"
               type="email"
+              autoComplete="email"
               value={form.email}
               onChange={onChange("email")}
               placeholder="voce@empresa.com"
-              className="border-cyan-700/20 bg-white/80 text-foreground placeholder:text-muted-foreground/80 dark:bg-background/60"
               required
             />
           </div>
 
           <div className="grid gap-2.5">
             <Label htmlFor="whatsappNumber">WhatsApp</Label>
-            <div className="grid grid-cols-[120px_1fr] gap-2">
+
+            <div className="grid grid-cols-[110px_1fr] sm:grid-cols-[120px_1fr] gap-2">
+
               <select
-                id="whatsappDdd"
+                name="whatsappDdd"
                 value={form.whatsappDdd}
-                onChange={(event) =>
-                  setForm((prev) => ({ ...prev, whatsappDdd: event.target.value }))
+                onChange={(e) =>
+                  setForm((prev) => ({ ...prev, whatsappDdd: e.target.value }))
                 }
-                className="h-10 rounded-md border border-cyan-700/20 bg-white/80 px-2 text-sm text-foreground dark:bg-background/60"
+                className="h-10 rounded-md border px-2 text-sm"
               >
                 {brazilDdds.map((ddd) => (
                   <option key={ddd} value={ddd}>
@@ -228,23 +313,24 @@ export function FormComponent() {
                   </option>
                 ))}
               </select>
+
               <Input
                 id="whatsappNumber"
+                name="whatsappNumber"
                 type="tel"
                 inputMode="numeric"
+                autoComplete="tel"
                 value={form.whatsappNumber}
                 onChange={onChange("whatsappNumber")}
-                placeholder="987654321"
-                className="border-cyan-700/20 bg-white/80 text-foreground placeholder:text-muted-foreground/80 dark:bg-background/60"
+                placeholder="9 9999-9999"
                 required
               />
+
             </div>
-            <p className="text-[11px] text-muted-foreground">
-              Use apenas numeros no contato. Exemplo: 987654321
-            </p>
+
             {(triedSubmit || form.whatsappNumber.length > 0) && !whatsappIsValid && (
-              <p className="rounded-md border border-red-500/50 bg-red-500/15 px-3 py-2 text-xs font-medium text-red-700 dark:text-red-300">
-                Numero de WhatsApp invalido. Use DDD brasileiro e um numero real de 9 digitos.
+              <p className="text-xs text-red-500">
+                Número de WhatsApp inválido.
               </p>
             )}
           </div>
@@ -253,10 +339,10 @@ export function FormComponent() {
             <Label htmlFor="subject">Assunto</Label>
             <Input
               id="subject"
+              name="subject"
               value={form.subject}
               onChange={onChange("subject")}
               placeholder="Ex.: Landing page institucional"
-              className="border-cyan-700/20 bg-white/80 text-foreground placeholder:text-muted-foreground/80 dark:bg-background/60"
               required
             />
           </div>
@@ -265,43 +351,28 @@ export function FormComponent() {
             <Label htmlFor="message">Mensagem</Label>
             <Textarea
               id="message"
+              name="message"
               value={form.message}
               onChange={onChange("message")}
-              placeholder="Descreva seu projeto, objetivo e prazo..."
+              placeholder="Descreva seu projeto..."
               rows={6}
-              className="h-36 resize-none border-cyan-700/20 bg-white/80 text-foreground placeholder:text-muted-foreground/80 dark:bg-background/60"
               required
             />
           </div>
 
-          <div className="text-xs text-neutral-500">
-            Contato alternativo: <span className="text-cyan-600 dark:text-cyan-300">{siteConfig.contactEmail}</span>
-          </div>
-
-          {status === "success" && (
-            <div className="rounded-md border border-emerald-400/50 bg-emerald-400/15 px-3 py-3 text-sm text-emerald-800 dark:text-emerald-300">
-              <p className="font-semibold">Mensagem enviada com sucesso.</p>
-              <p className="mt-1 font-medium">
-                Obrigado pelo contato. Vou responder no seu WhatsApp ou email em breve com os proximos passos.
-              </p>
-            </div>
-          )}
-          {status === "error" && (
-            <p className="rounded-md border border-red-500/50 bg-red-500/15 px-3 py-2 text-sm font-semibold text-red-700 dark:text-red-300">
-              Nao foi possivel enviar agora. Tente novamente em instantes.
-            </p>
-          )}
-
-          <CardFooter className="mt-1 grid grid-cols-1 gap-3 border-t border-border bg-background/50 px-0 pt-5">
+          <CardFooter className="px-0 pt-4">
             <Button
               type="submit"
               disabled={!canSubmit || loading}
-              className="w-full cursor-pointer bg-cyan-500 text-white transition duration-200 hover:-translate-y-0.5 hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full bg-cyan-500 hover:bg-cyan-400"
             >
-              {loading ? "Enviando..." : "Enviar mensagem"}
+              <Send size={16} />
+              {loading ? "Enviando mensagem..." : "Enviar mensagem"}
             </Button>
           </CardFooter>
+
         </form>
+
       </CardContent>
     </Card>
   )

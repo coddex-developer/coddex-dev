@@ -14,7 +14,7 @@ const MarqueeComponent = dynamic(
   () => import("@/app/components/MarqueeComponent").then((module) => module.MarqueeComponent),
   { ssr: false }
 )
-const ProjectsSectionComponent = dynamic(
+export const ProjectsSectionComponent = dynamic(
   () =>
     import("@/app/components/ProjectsSectionComponent").then(
       (module) => module.ProjectsSectionComponent
@@ -121,7 +121,7 @@ export default function HomePage() {
             <TextGenerateEffectComponent />
           </h2>
           <p className="max-w-3xl text-sm text-muted-foreground md:text-base">
-            Desenvolvimento de experiencias digitais com identidade forte, performance consistente e arquitetura preparada para evolucao.
+            Desenvolvimento de experiências digitáis com identidade forte, performance consistente e arquitetura preparada para evolução.
           </p>
         </Flex>
 
@@ -154,7 +154,7 @@ export default function HomePage() {
             transition={{ duration: 0.28 }}
           >
             <p className="text-xs uppercase tracking-[0.2em] text-cyan-500">Diferenciais</p>
-            <h2 className="text-3xl font-bold text-foreground md:text-5xl">Secoes pensadas como produto</h2>
+            <h2 className="text-3xl font-bold text-foreground md:text-5xl">Seções pensadas como produto</h2>
           </motion.div>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -171,7 +171,7 @@ export default function HomePage() {
         </Box>
       </div>
 
-      <ProjectsSectionComponent />
+      {/* <ProjectsSectionComponent /> */}
 
       <Box id="services" className="py-10 md:py-16">
         <StickyScrollComponent />
@@ -191,9 +191,9 @@ export default function HomePage() {
           className="rounded-3xl border border-cyan-500/20 bg-gradient-to-r from-cyan-500/15 via-cyan-500/5 to-transparent p-6 md:p-10"
         >
           <p className="mb-2 text-xs uppercase tracking-[0.25em] text-cyan-500">Next step</p>
-          <h3 className="mb-3 text-2xl font-bold md:text-4xl">Vamos desenhar o proximo projeto juntos</h3>
+          <h3 className="mb-3 text-2xl font-bold md:text-4xl">Vamos desenhar o próximo projeto juntos</h3>
           <p className="mb-5 max-w-2xl text-sm text-muted-foreground md:text-base">
-            Se voce precisa de um site institucional, landing page de conversao ou plataforma web completa, posso estruturar e implementar com foco em experiencia, performance e resultado.
+            Se voçê precisa de um site institucional, landing page de conversão ou plataforma web completa, posso estruturar e implementar com foco em experiencia, performance e resultado.
           </p>
           <a
             href="#contact"

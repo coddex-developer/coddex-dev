@@ -249,10 +249,10 @@ export function FormComponent() {
 
       </CardHeader>
 
-      <CardContent className="max-h-[78vh] px-5 pb-4 pt-2 sm:px-6 sm:pb-6">
+      <CardContent className="max-h-[78vh] overflow-y-auto px-5 pb-4 sm:px-6 sm:pb-6">
 
         <form
-          className="grid gap-4 sm:gap-5"
+          className="grid gap-2 sm:gap-4"
           onSubmit={onSubmit}
           aria-label="Formulário de contato"
           ref={formRef}
@@ -355,7 +355,7 @@ export function FormComponent() {
               value={form.message}
               onChange={onChange("message")}
               placeholder="Descreva seu projeto..."
-              rows={6}
+              rows={4}
               required
             />
           </div>

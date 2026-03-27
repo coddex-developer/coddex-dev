@@ -33,7 +33,7 @@ export function ContactModalComponent() {
             exit={{ scale: 0.92, y: 24, opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={(event) => event.stopPropagation()}
-            className="relative flex min-h-screen w-full items-center justify-center p-3 sm:p-4"
+            className="relative flex min-h-screen w-full items-center justify-center px-6 sm:p-4"
           >
             <FormComponent />
           </motion.div>

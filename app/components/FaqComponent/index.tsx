@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react"
 
 const faqItems = [
   {
-    question: "Qual tipo de projeto voçê desenvolve?",
+    question: "Qual tipo de projeto você desenvolve?",
     answer:
       "Landing pages, sites institucionais, dashboards e aplicacoes web completas com foco em performance e conversão.",
   },

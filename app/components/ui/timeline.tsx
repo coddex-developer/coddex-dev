@@ -4,6 +4,7 @@ import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
 import type { TimelineItem } from "@/app/data/timeline"
+import { CalendarCheck2Icon } from "lucide-react"
 
 export function Timeline({ items }: { items: TimelineItem[] }) {
   const trackRef = useRef<HTMLDivElement | null>(null)
@@ -49,7 +50,7 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
                       <span className="rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium tracking-wide text-cyan-600 dark:text-cyan-200">
                         {item.year}
                       </span>
-                      <span className="text-xs uppercase tracking-wider text-neutral-500">Milestone</span>
+                      <span className="text-xs uppercase tracking-wider text-neutral-500"><CalendarCheck2Icon /></span>
                     </div>
 
                     <h3 className="mb-2 text-lg font-semibold md:text-xl">{item.title}</h3>

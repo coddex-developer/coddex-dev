@@ -226,7 +226,7 @@ export function FormComponent() {
   }
 
   return (
-    <Card className="w-full max-w-[min(95vw,640px)] sm:max-w-[520px] md:max-w-[640px] border-cyan-500/25 bg-card/95 shadow-[0_18px_60px_rgba(2,6,23,0.24)]">
+    <Card className="w-full py-0 max-w-[min(95vw,640px)] sm:max-w-[520px] md:max-w-[640px] border-cyan-500/25 bg-card/95 shadow-[0_18px_60px_rgba(2,6,23,0.24)]">
 
       <CardHeader className="relative border-b border-border bg-background/70 px-5 pt-4 text-center sm:px-6">
 
@@ -249,7 +249,7 @@ export function FormComponent() {
 
       </CardHeader>
 
-      <CardContent className="max-h-[78vh] overflow-y-auto px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
+      <CardContent className="max-h-[78vh] px-5 pb-4 pt-2 sm:px-6 sm:pb-6">
 
         <form
           className="grid gap-4 sm:gap-5"
@@ -305,7 +305,7 @@ export function FormComponent() {
                 onChange={(e) =>
                   setForm((prev) => ({ ...prev, whatsappDdd: e.target.value }))
                 }
-                className="h-10 rounded-md border px-2 text-sm"
+                className="h-9 rounded-md border px-2 text-sm"
               >
                 {brazilDdds.map((ddd) => (
                   <option key={ddd} value={ddd}>
@@ -360,7 +360,7 @@ export function FormComponent() {
             />
           </div>
 
-          <CardFooter className="px-0 pt-4">
+          <CardFooter className="px-0 pt-2">
             <Button
               type="submit"
               disabled={!canSubmit || loading}

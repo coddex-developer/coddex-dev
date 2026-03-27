@@ -228,13 +228,13 @@ export function FormComponent() {
   return (
     <Card className="w-full py-0 max-w-[min(95vw,640px)] sm:max-w-[520px] md:max-w-[640px] border-cyan-500/25 bg-card/95 shadow-[0_18px_60px_rgba(2,6,23,0.24)]">
 
-      <CardHeader className="relative border-b border-border bg-background/70 px-5 pt-4 text-center sm:px-6">
+      <CardHeader className="relative rounded-t-lg border-b border-border bg-background/70 px-5 pt-4 text-center sm:px-6">
 
         <Button
           type="button"
           aria-label="Fechar formulário de contato"
           onClick={() => setIsOpen(false)}
-          className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-muted/40 text-muted-foreground hover:border-cyan-500/40 hover:text-cyan-600"
+          className="absolute cursor-pointer right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-muted/40 text-muted-foreground hover:border-cyan-500/40 hover:text-cyan-600"
         >
           <X size={16} />
         </Button>

@@ -1,6 +1,6 @@
-"use client"
+﻿"use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   Card,
   CardContent,
@@ -97,32 +97,36 @@ export function FormComponent() {
   const [loading, setLoading] = useState(false)
   const [triedSubmit, setTriedSubmit] = useState(false)
 
+  const syncFromDom = useCallback(() => {
+    const formEl = formRef.current
+    if (!formEl) return
+
+    const data = new FormData(formEl)
+    const next: FormData = {
+      name: String(data.get("name") ?? ""),
+      email: String(data.get("email") ?? ""),
+      whatsappDdd: String(data.get("whatsappDdd") ?? "11"),
+      whatsappNumber: String(data.get("whatsappNumber") ?? ""),
+      subject: String(data.get("subject") ?? ""),
+      message: String(data.get("message") ?? ""),
+    }
+
+    setForm((prev) => {
+      if (JSON.stringify(prev) === JSON.stringify(next)) return prev
+      return next
+    })
+  }, [])
+
   useEffect(() => {
     if (!isOpen) return
 
-    const syncFromDom = () => {
-      const formEl = formRef.current
-      if (!formEl) return
-
-      const data = new FormData(formEl)
-      const next: FormData = {
-        name: String(data.get("name") ?? ""),
-        email: String(data.get("email") ?? ""),
-        whatsappDdd: String(data.get("whatsappDdd") ?? "11"),
-        whatsappNumber: String(data.get("whatsappNumber") ?? ""),
-        subject: String(data.get("subject") ?? ""),
-        message: String(data.get("message") ?? ""),
-      }
-
-      setForm((prev) => {
-        if (JSON.stringify(prev) === JSON.stringify(next)) return prev
-        return next
-      })
-    }
-
     const rafId = requestAnimationFrame(syncFromDom)
-    return () => cancelAnimationFrame(rafId)
-  }, [isOpen])
+    const timeoutId = setTimeout(syncFromDom, 250)
+    return () => {
+      cancelAnimationFrame(rafId)
+      clearTimeout(timeoutId)
+    }
+  }, [isOpen, syncFromDom])
 
   const whatsappIsValid = useMemo(
     () => isValidWhatsapp(form.whatsappDdd, form.whatsappNumber),
@@ -169,7 +173,7 @@ export function FormComponent() {
       timeoutId = setTimeout(() => controller.abort(), 12000)
 
       const payload = {
-        _subject: `Novo contato portfólio: ${form.subject}`,
+        _subject: `Novo contato portfÃ³lio: ${form.subject}`,
         _replyto: form.email,
         source: "portfolio-web",
         name: form.name,
@@ -232,7 +236,7 @@ export function FormComponent() {
 
         <Button
           type="button"
-          aria-label="Fechar formulário de contato"
+          aria-label="Fechar formulÃ¡rio de contato"
           onClick={() => setIsOpen(false)}
           className="absolute cursor-pointer right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-muted/40 text-muted-foreground hover:border-cyan-500/40 hover:text-cyan-600"
         >
@@ -254,7 +258,8 @@ export function FormComponent() {
         <form
           className="grid gap-2 sm:gap-4"
           onSubmit={onSubmit}
-          aria-label="Formulário de contato"
+          onInput={syncFromDom}
+          aria-label="FormulÃ¡rio de contato"
           ref={formRef}
         >
 
@@ -330,7 +335,7 @@ export function FormComponent() {
 
             {(triedSubmit || form.whatsappNumber.length > 0) && !whatsappIsValid && (
               <p className="text-xs text-red-500">
-                Número de WhatsApp inválido.
+                NÃºmero de WhatsApp invÃ¡lido.
               </p>
             )}
           </div>
@@ -363,7 +368,7 @@ export function FormComponent() {
           <CardFooter className="px-0 pt-2">
             <Button
               type="submit"
-              disabled={!canSubmit || loading}
+              
               className="w-full bg-cyan-500 hover:bg-cyan-400"
             >
               <Send size={16} />
@@ -377,3 +382,4 @@ export function FormComponent() {
     </Card>
   )
 }
+

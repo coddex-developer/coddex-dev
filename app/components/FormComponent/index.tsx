@@ -369,7 +369,7 @@ export function FormComponent() {
             <Button
               type="submit"
               
-              className="w-full bg-cyan-500 hover:bg-cyan-400"
+              className="w-full bg-cyan-500 hover:bg-cyan-400 cursor-pointer"
             >
               <Send size={16} />
               {loading ? "Enviando mensagem..." : "Enviar mensagem"}

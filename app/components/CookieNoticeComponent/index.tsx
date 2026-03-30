@@ -19,10 +19,10 @@ export function CookieNoticeComponent() {
   if (!visible) return null
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-[95] mx-auto w-[min(960px,calc(100vw-2rem))] rounded-xl border border-cyan-500/30 bg-background/95 p-4 shadow-[0_0_30px_rgba(6,182,212,0.18)] backdrop-blur-md">
+    <div className="fixed bottom-4 left-4 right-4 z-95 mx-auto w-[min(960px,calc(100vw-2rem))] rounded-xl border border-cyan-500/30 bg-background/95 p-4 shadow-[0_0_30px_rgba(6,182,212,0.18)] backdrop-blur-md">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <p className="text-sm text-muted-foreground">
-          Este site utiliza cookies para melhorar sua experiencia, analisar navegacao e personalizar conteudo.
+          Este site utiliza cookies para melhorar sua experiência, analisar navegação e personalizar conteúdo.
           <a
             href={siteConfig.links.cookiePolicy}
             target="_blank"

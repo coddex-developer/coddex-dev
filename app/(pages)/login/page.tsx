@@ -17,7 +17,7 @@ export default function Page() {
     return (
         <>
             <div className="min-h-dvh w-full flex flex-col justify-center items-center">
-                <Card className="w-full py-0 max-w-[min(95vw,640px)] sm:max-w-[520px] md:max-w-[640px] border-cyan-500/25 bg-card/95 shadow-[0_18px_60px_rgba(2,6,23,0.24)]">
+                <Card className="w-full rounded-2xl py-0 max-w-[min(95vw,640px)] sm:max-w-[520px] md:max-w-[640px] border-cyan-500/25 bg-card/95 shadow-[0_18px_60px_rgba(2,6,23,0.24)]">
 
                     <CardHeader className="relative rounded-t-xl border-b border-border bg-background/70 px-5 pt-4 text-center sm:px-6">
 
@@ -31,7 +31,7 @@ export default function Page() {
 
                     </CardHeader>
 
-                    <CardContent className="max-h-[78vh] overflow-y-auto px-5 pt-6 pb-6 sm:px-6 sm:pb-6">
+                    <CardContent className="max-h-[78vh] rounded-b-2xl overflow-y-auto px-5 pt-6 pb-6 sm:px-6 sm:pb-6">
 
                         <form
                             className="grid gap-2 py-4 sm:gap-4"
@@ -70,8 +70,8 @@ export default function Page() {
                             </div>
 
                             <CardFooter className="px-0 pt-2 flex mt-2 flex-col-reverse gap-4 sm:grid sm:grid-cols-2 sm:gap-8 rounded-b-2xl">
-                                <Link href={"/"}>
-                                <Button type={"button"} className="w-full cursor-pointer" variant={"secondary"} title="Voltar para home">Voltar</Button>
+                                <Link className="w-full cursor-pointer" href={"/"}>
+                                <Button className="w-full" type={"button"} variant={"secondary"} title="Voltar para home">Voltar</Button>
                                 </Link>
                                 <Button
                                     type="submit"

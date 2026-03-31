@@ -1,4 +1,4 @@
-import HomePage from "./pages/HomePage/intex";
+import HomePage from "./(pages)/(home)/page";
 import { NavbarMenuComponent } from "./components/NavbarMenuComponent";
 
 export default function Home() {

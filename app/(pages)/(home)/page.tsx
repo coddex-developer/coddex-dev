@@ -181,6 +181,10 @@ export default function HomePage() {
         <TimelineComponent />
       </Box>
 
+      {/* {<Box id="projects" className="py-10 md:py-16">
+        <ProjectsSectionComponent />
+      </Box>} */}
+
       <FaqComponent />
 
       <Box className="px-4 pb-6 md:px-8">

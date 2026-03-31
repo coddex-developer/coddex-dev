@@ -1,5 +1,4 @@
 import Link from "next/link"
-
 export default function NotFound() {
   return (
     <main className="flex min-h-screen items-center justify-center px-4">
@@ -12,7 +11,7 @@ export default function NotFound() {
         <div className="mt-6">
           <Link
             href="/"
-            className="inline-flex rounded-lg bg-cyan-500/20 px-5 py-2 text-sm font-medium text-cyan-700 transition hover:bg-cyan-500/30 dark:text-cyan-200"
+            className="inline-flex cursor-pointer rounded-lg bg-cyan-500/20 px-5 py-2 text-sm font-medium text-cyan-700 transition hover:bg-cyan-500/30 dark:text-cyan-200"
           >
             Voltar para home
           </Link>

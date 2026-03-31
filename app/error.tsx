@@ -20,13 +20,13 @@ export default function Error({
         <div className="mt-6 flex justify-center gap-3">
           <button
             onClick={reset}
-            className="rounded-lg bg-red-500/20 px-4 py-2 text-sm font-medium text-red-700 transition hover:bg-red-500/30 dark:text-red-300"
+            className="rounded-lg cursor-poiner bg-red-500/20 px-4 py-2 text-sm font-medium text-red-700 transition hover:bg-red-500/30 dark:text-red-300"
           >
             Tentar novamente
           </button>
           <Link
             href="/"
-            className="rounded-lg bg-cyan-500/20 px-4 py-2 text-sm font-medium text-cyan-700 transition hover:bg-cyan-500/30 dark:text-cyan-200"
+            className="rounded-lg cursor-poiner bg-cyan-500/20 px-4 py-2 text-sm font-medium text-cyan-700 transition hover:bg-cyan-500/30 dark:text-cyan-200"
           >
             Ir para home
           </Link>

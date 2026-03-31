@@ -335,7 +335,7 @@ export function FormComponent() {
 
             {(triedSubmit || form.whatsappNumber.length > 0) && !whatsappIsValid && (
               <p className="text-xs text-red-500">
-                NÃºmero de WhatsApp invÃ¡lido.
+                Número de WhatsApp inválido.
               </p>
             )}
           </div>

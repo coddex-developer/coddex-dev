@@ -116,7 +116,7 @@ export function ProjectsSectionComponent() {
       <section id="projects" className="px-4 py-16 md:px-8 md:py-24">
         <div className="mb-10 flex flex-col gap-4 text-center md:mb-14">
           <p className="text-xs uppercase tracking-[0.25em] text-cyan-500">Portfolio Projects</p>
-          <h2 className="text-3xl font-bold text-foreground md:text-5xl">Projetos pensados como produto</h2>
+          <h2 className="text-3xl font-bold text-foreground md:text-5xl">Alguns Projetos</h2>
           <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
             Cada projeto combina design, engenharia e estrategia para gerar resultado real.
           </p>
@@ -161,7 +161,7 @@ export function ProjectsSectionComponent() {
 
               <button
                 onClick={() => openProject(project)}
-                className="w-full rounded-lg bg-cyan-500/20 px-4 py-2 text-sm font-medium text-cyan-700 transition hover:bg-cyan-500/30 dark:text-cyan-200"
+                className="w-full cursor-pointer rounded-lg bg-cyan-500/20 px-4 py-2 text-sm font-medium text-cyan-700 transition hover:bg-cyan-500/30 dark:text-cyan-200"
               >
                 Visualizar projeto
               </button>

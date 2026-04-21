@@ -9,6 +9,7 @@ import { ChevronDown, Layers3, Orbit, Rocket, ScanSearch } from "lucide-react"
 import { FooterComponent } from "@/app/components/FooterComponent"
 import { motion } from "framer-motion"
 import dynamic from "next/dynamic"
+import { WhatsAppFloatComponent } from "@/app/components/WhatsAppFloatComponent"
 
 const MarqueeComponent = dynamic(
   () => import("@/app/components/MarqueeComponent").then((module) => module.MarqueeComponent),
@@ -144,6 +145,8 @@ export default function HomePage() {
 
       <MarqueeComponent />
 
+      <ProjectsSectionComponent />
+
       <div>
         <Box className="px-4 py-14 md:px-8 md:py-24">
           <motion.div
@@ -207,6 +210,8 @@ export default function HomePage() {
           </a>
         </motion.section>
       </Box>
+
+      <WhatsAppFloatComponent />
 
       <Box id="contact" className="px-4 md:px-0 pb-10 md:pb-16">
         <FooterComponent />

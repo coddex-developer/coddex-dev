@@ -6,11 +6,11 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackgroundBeams } from "./components/ui/background-beams";
 import { IsOpenProvider } from "./contexts/isOpenContext";
 import { ThemeContextProvider } from "./contexts/ThemeContext";
-import { WhatsAppFloatComponent } from "./components/WhatsAppFloatComponent";
 import { ContactModalComponent } from "./components/ContactModalComponent";
 import { CookieNoticeComponent } from "./components/CookieNoticeComponent";
 import { SiteLoaderComponent } from "./components/SiteLoaderComponent";
 import { Toaster } from "sonner";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,15 +51,17 @@ export default function RootLayout({
         </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} mx-auto w-full max-w-7xl px-4 antialiased sm:px-6 lg:px-10`}>
-          <IsOpenProvider>
-            <ThemeContextProvider>
-              <SiteLoaderComponent />
-              {children}
-              <ContactModalComponent />
-              <WhatsAppFloatComponent />
-              <CookieNoticeComponent />
-            </ThemeContextProvider>
-          </IsOpenProvider>
+          <AuthProvider>
+            <IsOpenProvider>
+              <ThemeContextProvider>
+                <SiteLoaderComponent />
+                {children}
+                <ContactModalComponent />
+                <CookieNoticeComponent />
+              </ThemeContextProvider>
+            </IsOpenProvider>
+          </AuthProvider>
+          <Toaster />
           <div className="pointer-events-none fixed inset-0 z-50">
             <ProgressiveBlur
               height="5%"
@@ -67,7 +69,7 @@ export default function RootLayout({
             />
             <ScrollProgress />
           </div>
-          <BackgroundBeams className="pointer-events-none fixed -z-10 hidden md:block opacity-70" />
+          {/* <BackgroundBeams className="pointer-events-none fixed -z-10 hidden md:block opacity-70" /> */}
           <Toaster
             position="top-center"
             richColors

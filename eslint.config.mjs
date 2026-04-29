@@ -12,7 +12,17 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "node_modules/**",
   ]),
+  {
+    rules: {
+      "@next/next/no-html-link-for-pages": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "no-unused-vars": "off", // Handled by TypeScript
+    },
+  },
 ]);
 
 export default eslintConfig;

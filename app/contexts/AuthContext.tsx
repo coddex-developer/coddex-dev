@@ -20,32 +20,69 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  // Recuperar token do localStorage ao montar
+  // Verificar autenticação ao montar (via cookie HttpOnly)
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    const storedAdminId = localStorage.getItem("adminId");
-    
-    if (storedToken && storedAdminId) {
-      setToken(storedToken);
-      setAdminId(storedAdminId);
-    }
-    
-    setIsLoading(false);
+    const checkAuth = async () => {
+      try {
+        const response = await fetch("/api/auth/verify", {
+          credentials: "include", // Enviar cookies
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setToken(data.token);
+          setAdminId(data.adminId);
+        } else {
+          setToken(null);
+          setAdminId(null);
+        }
+      } catch {
+        console.error("Erro ao verificar autenticação");
+        setToken(null);
+        setAdminId(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
   }, []);
 
-  const login = (newToken: string, newAdminId: string) => {
-    setToken(newToken);
-    setAdminId(newAdminId);
-    localStorage.setItem("token", newToken);
-    localStorage.setItem("adminId", newAdminId);
+  const login = async (newToken: string, newAdminId: string) => {
+    try {
+      // Salvar token via API (que retorna cookie HttpOnly)
+      const response = await fetch("/api/auth/set-token", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: newToken, adminId: newAdminId }),
+      });
+
+      if (response.ok) {
+        setToken(newToken);
+        setAdminId(newAdminId);
+      } else {
+        throw new Error("Falha ao salvar autenticação");
+      }
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+      throw error;
+    }
   };
 
-  const logout = () => {
-    setToken(null);
-    setAdminId(null);
-    localStorage.removeItem("token");
-    localStorage.removeItem("adminId");
-    router.push("/login");
+  const logout = async () => {
+    try {
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+    } finally {
+      setToken(null);
+      setAdminId(null);
+      router.push("/login");
+    }
   };
 
   return (

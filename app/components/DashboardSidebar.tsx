@@ -23,7 +23,7 @@ export function DashboardSidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 lg:hidden p-2 rounded-lg bg-background border border-border shadow-lg"
+        className="fixed top-4 right-5 z-50 lg:hidden p-2 rounded-lg bg-background border border-border shadow-lg"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>

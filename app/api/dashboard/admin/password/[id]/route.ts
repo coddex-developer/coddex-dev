@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function PUT(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    context: any
 ) {
+    const { params } = context;
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
 

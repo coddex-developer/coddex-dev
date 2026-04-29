@@ -61,7 +61,6 @@ export default function RootLayout({
               </ThemeContextProvider>
             </IsOpenProvider>
           </AuthProvider>
-          <Toaster />
           <div className="pointer-events-none fixed inset-0 z-50">
             <ProgressiveBlur
               height="5%"
@@ -69,7 +68,7 @@ export default function RootLayout({
             />
             <ScrollProgress />
           </div>
-          {/* <BackgroundBeams className="pointer-events-none fixed -z-10 hidden md:block opacity-70" /> */}
+          <BackgroundBeams className="pointer-events-none fixed -z-10 hidden md:block opacity-70" />
           <Toaster
             position="top-center"
             richColors

@@ -19,9 +19,10 @@ interface AdminConfig {
 
 export default function SettingsPage() {
   const { token, adminId } = useAuth();
-  const { data: config, isLoading } = useFetch<AdminConfig>(
+  const { data: config, isLoading } = useFetch<AdminConfig | { data: AdminConfig }>(
     "/api/dashboard/config"
   );
+  const configData = (config && "data" in config ? config.data : config) as AdminConfig | undefined;
   const [formData, setFormData] = useState({
     phoneNumber: "",
     imageProfile: "",
@@ -36,30 +37,33 @@ export default function SettingsPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
-    if (config) {
+    if (configData) {
       setFormData({
-        phoneNumber: config.phoneNumber || "",
-        imageProfile: config.imageProfile || "",
-        activateWebsite: config.activateWebsite || true,
+        phoneNumber: configData.phoneNumber || "",
+        imageProfile: configData.imageProfile || "",
+        activateWebsite: configData.activateWebsite ?? true,
       });
     }
-  }, [config]);
+  }, [configData]);
 
   const handleConfigSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!config?.id || !adminId) return;
+    if (!configData?.id || !adminId) {
+      toast.error("Falha ao atualizar configurações. Tente novamente.");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
       await apiFetch(
-        `/api/dashboard/config/${config.id}`,
+        `/api/dashboard/config/${configData.id}`,
         "PUT",
         formData,
         token || ""
       );
       toast.success("Configurações atualizadas!");
     } catch (err) {
-      toast.error("Erro ao atualizar");
+      toast.error(err instanceof Error ? err.message : "Erro ao atualizar");
     } finally {
       setIsSubmitting(false);
     }
@@ -127,8 +131,8 @@ export default function SettingsPage() {
           <h2 className="text-xl font-semibold">Configurações do Website</h2>
           <p className="text-sm text-foreground/60 mt-1">Configure informações públicas do seu website</p>
         </div>
-        <form onSubmit={handleConfigSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form onSubmit={handleConfigSubmit} className="space-y-6 w-full max-w-full">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="phone">Telefone</Label>
               <Input
@@ -178,7 +182,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <Button disabled={isSubmitting} type="submit" className="w-full md:w-auto h-10">
+          <Button disabled={isSubmitting} type="submit" className="w-full sm:w-auto h-10">
             {isSubmitting ? "Salvando..." : "Salvar Configurações"}
           </Button>
         </form>
@@ -190,7 +194,7 @@ export default function SettingsPage() {
           <h2 className="text-xl font-semibold">Alterar Senha</h2>
           <p className="text-sm text-foreground/60 mt-1">Atualize sua senha de acesso ao dashboard</p>
         </div>
-        <form onSubmit={handlePasswordSubmit} className="space-y-6 max-w-md">
+        <form onSubmit={handlePasswordSubmit} className="space-y-6 w-full max-w-full sm:max-w-xl">
           <div className="space-y-2">
             <Label htmlFor="current">Senha Atual</Label>
             <div className="relative">

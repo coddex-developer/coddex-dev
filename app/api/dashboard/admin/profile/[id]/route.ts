@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(request: NextRequest) {
+export async function PUT(
+    request: NextRequest,
+    context: any
+) {
+    const { params } = context;
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
 
@@ -20,11 +24,7 @@ export async function POST(request: NextRequest) {
 
     try {
         const body = await request.json();
-        const { id } = request.nextUrl.pathname.split('/').pop() === 'profile' 
-            ? body 
-            : { id: request.nextUrl.pathname.split('/').pop() };
-
-        const response = await fetch(`${apiUrl}/dashboard/admin/profile/${id}`, {
+        const response = await fetch(`${apiUrl}/dashboard/admin/profile/${params.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

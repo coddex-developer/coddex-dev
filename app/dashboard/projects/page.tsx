@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFetch, apiFetch } from "@/app/hooks/useFetch";
 import { useAuth } from "@/app/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Trash2, Plus, Edit2, X, Upload, GripVertical } from "lucide-react";
+import { Trash2, Plus, Edit2, X, GripVertical } from "lucide-react";
 
 interface Project {
   id: string;
@@ -75,7 +75,18 @@ function DraggableImage({
 }
 
 function ProjectModal({ isOpen, onClose, project, onSave, isLoading }: ProjectModalProps) {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
+    title: "",
+    description: "",
+    category: "",
+    stack: "",
+    highlights: "",
+    images: [] as string[],
+    liveUrl: "",
+    repoUrl: "",
+  };
+
+  const getInitialFormData = () => ({
     title: project?.title || "",
     description: project?.description || "",
     category: project?.category || "",
@@ -85,17 +96,34 @@ function ProjectModal({ isOpen, onClose, project, onSave, isLoading }: ProjectMo
     liveUrl: project?.liveUrl || "",
     repoUrl: project?.repoUrl || "",
   });
+
+  const [formData, setFormData] = useState(initialFormData);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
-  const handleImageAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      const newImages = Array.from(files).map(file => URL.createObjectURL(file));
-      setFormData(prev => ({
-        ...prev,
-        images: [...prev.images, ...newImages]
-      }));
+  // Atualizar formData sempre que abrir o modal ou mudar o projeto
+  useEffect(() => {
+    if (!isOpen) {
+      setFormData(initialFormData);
+      return;
     }
+
+    setFormData(getInitialFormData());
+  }, [project, isOpen]);
+
+  const [newImageUrl, setNewImageUrl] = useState("");
+
+  const handleImageUrlAdd = () => {
+    const trimmedUrl = newImageUrl.trim();
+    if (!trimmedUrl) {
+      toast.error("Insira uma URL de imagem válida.");
+      return;
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      images: [...prev.images, trimmedUrl]
+    }));
+    setNewImageUrl("");
   };
 
   const handleImageRemove = (index: number) => {
@@ -252,42 +280,35 @@ function ProjectModal({ isOpen, onClose, project, onSave, isLoading }: ProjectMo
           </div>
 
           <div className="space-y-3">
-            <Label>Imagens (arraste para reordenar)</Label>
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <Input
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={handleImageAdd}
-                  className="hidden"
-                  id="image-upload"
-                />
-                <Label
-                  htmlFor="image-upload"
-                  className="flex items-center gap-2 px-4 py-2 bg-background border border-border rounded-lg cursor-pointer hover:bg-background/80 transition-colors flex-1 sm:flex-none"
-                >
-                  <Upload size={16} />
-                  Adicionar Imagens
-                </Label>
-              </div>
-
-              {formData.images.length > 0 && (
-                <div className="space-y-2 max-h-48 overflow-y-auto border border-border/50 rounded-lg p-3">
-                  {formData.images.map((image, index) => (
-                    <DraggableImage
-                      key={`image-${index}`}
-                      image={image}
-                      index={index}
-                      onRemove={handleImageRemove}
-                      onDragStart={handleDragStart}
-                      onDragOver={handleDragOver}
-                      onDrop={handleDrop}
-                    />
-                  ))}
-                </div>
-              )}
+            <Label>Imagens (URL)</Label>
+            <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
+              <Input
+                type="url"
+                placeholder="https://exemplo.com/imagem.jpg"
+                value={newImageUrl}
+                onChange={(e) => setNewImageUrl(e.target.value)}
+                className="h-10"
+              />
+              <Button type="button" className="h-10" onClick={handleImageUrlAdd}>
+                Adicionar
+              </Button>
             </div>
+
+            {formData.images.length > 0 && (
+              <div className="space-y-2 max-h-48 overflow-y-auto border border-border/50 rounded-lg p-3">
+                {formData.images.map((image, index) => (
+                  <DraggableImage
+                    key={`image-${index}`}
+                    image={image}
+                    index={index}
+                    onRemove={handleImageRemove}
+                    onDragStart={handleDragStart}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-border/50">
@@ -395,7 +416,10 @@ export default function ProjectsPage() {
 
       <ProjectModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          setEditingProject(null);
+        }}
         project={editingProject}
         onSave={handleSave}
         isLoading={isSubmitting}

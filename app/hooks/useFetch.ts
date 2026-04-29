@@ -62,9 +62,23 @@ export async function apiFetch<T>(
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || "Erro na requisição");
+    let errorMessage = "Erro na requisição";
+    try {
+      const error = await response.json();
+      errorMessage = error?.message || errorMessage;
+    } catch {
+      // ignore parse errors
+    }
+    throw new Error(errorMessage);
   }
 
-  return response.json();
+  if (response.status === 204) {
+    return {} as T;
+  }
+
+  try {
+    return await response.json();
+  } catch {
+    return {} as T;
+  }
 }

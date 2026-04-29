@@ -6,10 +6,17 @@ import { Label } from "@/components/ui/label";
 import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import { Card } from "@radix-ui/themes";
 import Link from "next/link";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { toast } from "sonner";
 import { useAuth } from "@/app/contexts/AuthContext";
 import { useRouter } from "next/navigation";
+import * as z from "zod";
+import axios from "axios";
+
+const loginSchema = z.object({
+    username: z.string().min(4, "O mínimo de caracteres permitido é 4"),
+    password: z.string().min(4, "O mínimo de caracteres permitido é 4"),
+});
 
 export default function Page() {
     const [visible, setVisible] = useState(false)
@@ -19,46 +26,54 @@ export default function Page() {
     const { login } = useAuth()
     const router = useRouter()
 
-    async function handleSubmit(e: React.FormEvent) {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        if (!username.trim() || !password.trim()) {
-            toast.error("Campos vazios", {
-                description: "Preencha usuário e senha"
+        const parsed = loginSchema.safeParse({ username, password });
+
+        if (!parsed.success) {
+            const firstError = parsed.error?.errors[0];
+            toast.error("Dados inválidos", {
+                description: firstError?.message || "Verifique os dados do formulário.",
             });
             return;
         }
 
         setIsLoading(true);
+
         try {
-            const res = await fetch(`/api/auth/login`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    username, password
-                })
-            });
-            const data = await res.json();
-            
-            if (!res.ok) {
+            const { data } = await axios.post("/api/auth/login", parsed.data);
+
+            if (!data || !data.token) {
                 toast.error("Erro ao autenticar", {
-                    description: data?.message || 'Erro desconhecido'
+                    description: data?.message || "Resposta inválida do servidor.",
                 });
                 return;
             }
 
-            // Extrair ID do token JWT (formato: header.payload.signature)
-            const payload = JSON.parse(atob(data.token.split('.')[1]));
-            const adminId = payload.sub || payload.id;
+            const tokenParts = data.token.split(".");
+            const payload = tokenParts.length === 3 ? JSON.parse(atob(tokenParts[1])) : null;
+            const adminId = payload?.sub || payload?.id || "";
 
-            login(data.token, adminId);
+            if (!adminId) {
+                toast.error("Erro ao autenticar", {
+                    description: "ID do usuário não encontrado no token.",
+                });
+                return;
+            }
+
+            await login(data.token, adminId);
             toast.success("Login realizado com sucesso!");
             router.push("/dashboard");
         } catch (error) {
+            const message = axios.isAxiosError(error)
+                ? error.response?.data?.message || error.message
+                : error instanceof Error
+                ? error.message
+                : "Erro desconhecido";
+
             toast.error("Erro ao conectar", {
-                description: error instanceof Error ? error.message : 'Erro desconhecido'
+                description: message,
             });
         } finally {
             setIsLoading(false);

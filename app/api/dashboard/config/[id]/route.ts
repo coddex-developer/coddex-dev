@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function GET(
+    request: NextRequest,
+    context: any
+) {
+    const { params } = context;
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
 
@@ -9,7 +13,7 @@ export async function GET(request: NextRequest) {
     }
 
     try {
-        const response = await fetch(`${apiUrl}/dashboard/config`, {
+        const response = await fetch(`${apiUrl}/dashboard/config/${params.id}`, {
             headers: { 'Authorization': `Bearer ${token}` },
         });
 
@@ -21,8 +25,9 @@ export async function GET(request: NextRequest) {
 
 export async function PUT(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    context: any
 ) {
+    const { params } = context;
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
 

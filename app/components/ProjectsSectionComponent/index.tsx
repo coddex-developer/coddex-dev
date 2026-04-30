@@ -166,7 +166,7 @@ export function ProjectsSectionComponent() {
                 Visualizar projeto
               </button>
             </motion.article>
-          ))}
+        ))}
         </div>
       </section>
 

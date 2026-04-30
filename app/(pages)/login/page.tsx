@@ -19,7 +19,7 @@ import { useAuth } from "@/app/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import axios from "axios";
-
+const url = process.env.NEXT_PUBLIC_API_URL
 const loginSchema = z.object({
   username: z.string().min(4, "O mínimo de caracteres permitido é 4"),
   password: z.string().min(4, "O mínimo de caracteres permitido é 4"),
@@ -54,7 +54,7 @@ export default function Page() {
     setIsLoading(true);
 
     try {
-      const { data } = await axios.post("/api/auth/login", parsed.data);
+      const { data } = await axios.post(url+"/api/auth/login", parsed.data);
 
       if (!data || !data.token) {
         toast.error("Erro ao autenticar", {

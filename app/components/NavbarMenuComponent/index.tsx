@@ -32,10 +32,9 @@ export function NavbarMenuComponent() {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  function handleDownload(ev: React.MouseEvent<HTMLAnchorElement>) {
-    ev.preventDefault()
+  function handleDownload() {
     toast.success("Sucesso!", {
-      description: "Iniciando Download!",
+      description: "Iniciando Download!"
     })
 
   }
@@ -51,8 +50,8 @@ export function NavbarMenuComponent() {
             <AnimatedThemeToggler />
 
             <NavbarButton
-              // href={"#"}
-              download={"../public/cv/Gabriel_RodriguesLima_Currículo.pdf"}
+              href={"/cv/Gabriel_RodriguesLima_Currículo.pdf"}
+              download={"Gabriel_RodriguesLima_Currículo.pdf"}
               target="_blank"
               rel="noreferrer"
               onClick={handleDownload}
@@ -96,11 +95,12 @@ export function NavbarMenuComponent() {
 
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
-                download={"../public/cv/Gabriel_RodriguesLima_Currículo.pdf"}
+                href="/cv/Gabriel_RodriguesLima_Currículo.pdf"
+                download={"Gabriel_RodriguesLima_Currículo.pdf"}
                 target="_blank"
                 rel="noreferrer"
-                onClick={(ev: React.MouseEvent<HTMLAnchorElement>) => {
-                  handleDownload(ev)
+                onClick={() => {
+                  handleDownload()
                   setIsMobileMenuOpen(false)
                 }}
                 variant="primary"

@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
-import { Github, Instagram, Linkedin, Mail, Sparkles, MessageCircleMore, Youtube, AtSign, Music2, Palette, Dribbble } from "lucide-react";
+import { Github, Instagram, Linkedin, Mail, Sparkles, MessageCircleMore } from "lucide-react";
 import { siteConfig } from "@/app/config/site";
 const contactUrl = {
   email: "mailto:gabrielrodrigueslima222@gmail.com",

@@ -37,16 +37,16 @@ const initialForm: FormData = {
 }
 
 const brazilDdds = [
-  "11","12","13","14","15","16","17","18","19",
-  "21","22","24","27","28",
-  "31","32","33","34","35","37","38",
-  "41","42","43","44","45","46",
-  "47","48","49",
-  "51","53","54","55",
-  "61","62","63","64","65","66","67","68","69",
-  "71","73","74","75","77","79",
-  "81","82","83","84","85","86","87","88","89",
-  "91","92","93","94","95","96","97","98","99",
+  "11", "12", "13", "14", "15", "16", "17", "18", "19",
+  "21", "22", "24", "27", "28",
+  "31", "32", "33", "34", "35", "37", "38",
+  "41", "42", "43", "44", "45", "46",
+  "47", "48", "49",
+  "51", "53", "54", "55",
+  "61", "62", "63", "64", "65", "66", "67", "68", "69",
+  "71", "73", "74", "75", "77", "79",
+  "81", "82", "83", "84", "85", "86", "87", "88", "89",
+  "91", "92", "93", "94", "95", "96", "97", "98", "99",
 ]
 
 const genericNumbers = new Set([
@@ -74,7 +74,7 @@ function formatWhatsapp(value: string) {
   if (!digits) return ""
   if (digits.length <= 1) return digits
   if (digits.length <= 5) return `${digits[0]} ${digits.slice(1)}`
-  return `${digits[0]} ${digits.slice(1,5)}-${digits.slice(5)}`
+  return `${digits[0]} ${digits.slice(1, 5)}-${digits.slice(5)}`
 }
 
 function isValidWhatsapp(ddd: string, number: string) {
@@ -118,7 +118,7 @@ export function FormComponent() {
   }, [])
 
   useEffect(() => {
-    if (!isOpen) return
+    // if (!isOpen) return
 
     const rafId = requestAnimationFrame(syncFromDom)
     const timeoutId = setTimeout(syncFromDom, 250)
@@ -145,16 +145,16 @@ export function FormComponent() {
 
   const onChange =
     (field: keyof FormData) =>
-    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 
-      let value = event.target.value
+        let value = event.target.value
 
-      if (field === "whatsappNumber") {
-        value = formatWhatsapp(value)
+        if (field === "whatsappNumber") {
+          value = formatWhatsapp(value)
+        }
+
+        setForm((prev) => ({ ...prev, [field]: value }))
       }
-
-      setForm((prev) => ({ ...prev, [field]: value }))
-    }
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
@@ -368,7 +368,7 @@ export function FormComponent() {
           <CardFooter className="px-0 pt-2">
             <Button
               type="submit"
-              
+
               className="w-full bg-cyan-500 hover:bg-cyan-400 cursor-pointer"
             >
               <Send size={16} />

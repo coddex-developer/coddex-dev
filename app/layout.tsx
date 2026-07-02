@@ -9,7 +9,6 @@ import { ContactModalComponent } from "./components/ContactModalComponent";
 import { CookieNoticeComponent } from "./components/CookieNoticeComponent";
 import { SiteLoaderComponent } from "./components/SiteLoaderComponent";
 import { Toaster } from "sonner";
-import { AuthProvider } from "./contexts/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,7 +49,6 @@ export default function RootLayout({
         </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} mx-auto w-full max-w-7xl px-4 antialiased sm:px-6 lg:px-10`}>
-          <AuthProvider>
             <IsOpenProvider>
               <ThemeContextProvider>
                 <SiteLoaderComponent />
@@ -59,7 +57,6 @@ export default function RootLayout({
                 <CookieNoticeComponent />
               </ThemeContextProvider>
             </IsOpenProvider>
-          </AuthProvider>
           <div className="pointer-events-none fixed inset-0 z-50">
             <ProgressiveBlur
               height="5%"

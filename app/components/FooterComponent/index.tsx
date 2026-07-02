@@ -3,25 +3,32 @@
 import { motion } from "framer-motion";
 import { Github, Instagram, Linkedin, Mail, Sparkles, MessageCircleMore, Youtube, AtSign, Music2, Palette, Dribbble } from "lucide-react";
 import { siteConfig } from "@/app/config/site";
+const contactUrl = {
+  email: "mailto:gabrielrodrigueslima222@gmail.com",
+  linkedin: "https://www.linkedin.com/in/gabriel-rodrigues-lima-337477240/",
+  github: "https://github.com/coddex-developer",
+  instagram: "https://www.instagram.com/gabrielrodrigues2106/",
+  whatsapp: "https://wa.me/+5561991556764",
 
+}
 const contactMap = {
   email: {
-    href: `mailto:${siteConfig.contactEmail}`,
+    href: contactUrl.email,
     label: "Email",
     icon: Mail,
   },
   linkedin: {
-    href: siteConfig.links.linkedin,
+    href: contactUrl.linkedin,
     label: "LinkedIn",
     icon: Linkedin,
   },
   github: {
-    href: siteConfig.links.github,
+    href: contactUrl.github,
     label: "GitHub",
     icon: Github,
   },
   instagram: {
-    href: siteConfig.links.instagram,
+    href: contactUrl.instagram,
     label: "Instagram",
     icon: Instagram,
   },
@@ -29,31 +36,6 @@ const contactMap = {
     href: siteConfig.links.whatsapp,
     label: "WhatsApp",
     icon: MessageCircleMore,
-  },
-  youtube: {
-    href: siteConfig.links.youtube,
-    label: "YouTube",
-    icon: Youtube,
-  },
-  x: {
-    href: siteConfig.links.x,
-    label: "X",
-    icon: AtSign,
-  },
-  tiktok: {
-    href: siteConfig.links.tiktok,
-    label: "TikTok",
-    icon: Music2,
-  },
-  behance: {
-    href: siteConfig.links.behance,
-    label: "Behance",
-    icon: Palette,
-  },
-  dribbble: {
-    href: siteConfig.links.dribbble,
-    label: "Dribbble",
-    icon: Dribbble,
   },
 } as const;
 
@@ -67,8 +49,7 @@ export function FooterComponent() {
   const sections = [
     { label: "Sobre", href: "#features" },
     { label: "Projetos", href: "#projects" },
-    { label: "Jornada", href: "#journey" },
-    { label: "Contato", href: "#contact" },
+    { label: "Jornada", href: "#journey" }
   ];
 
   return (
@@ -79,7 +60,7 @@ export function FooterComponent() {
         <div className="space-y-4">
           <p className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1 text-xs uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-300">
             <Sparkles size={14} />
-            Future Ready
+            Preparado para o Futuro?
           </p>
 
           <h3 className="text-2xl font-bold leading-tight md:text-4xl">
@@ -127,7 +108,7 @@ export function FooterComponent() {
 
       <div className="relative mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
         <span>© {year} Gabriel Rodrigues</span>
-        <span>Front-End • Full Stack • APIs</span>
+        <span>Developer FullStack</span>
       </div>
     </footer>
   );

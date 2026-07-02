@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { BackgroundBeams } from "./components/ui/background-beams";
 import { IsOpenProvider } from "./contexts/isOpenContext";
 import { ThemeContextProvider } from "./contexts/ThemeContext";
 import { ContactModalComponent } from "./components/ContactModalComponent";

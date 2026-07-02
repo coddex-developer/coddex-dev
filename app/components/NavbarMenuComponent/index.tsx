@@ -15,7 +15,6 @@ import {
 
 import { useState } from "react"
 import { AnimatedThemeToggler } from "../ui/AnimatedThemeToggler"
-import { siteConfig } from "@/app/config/site"
 import { toast } from "sonner"
 
 interface TextItemsProps {

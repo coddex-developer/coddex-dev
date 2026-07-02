@@ -15,6 +15,7 @@ import { Card } from "@radix-ui/themes";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
+import { useAuth } from "@/app/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import axios from "axios";
@@ -30,6 +31,7 @@ export default function Page() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const { login } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -75,6 +77,8 @@ export default function Page() {
         });
         return;
       }
+
+      await login(data.token, adminId);
 
       toast.success("Login realizado com sucesso!");
       router.push("/dashboard");

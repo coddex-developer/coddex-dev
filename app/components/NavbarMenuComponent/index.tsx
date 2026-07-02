@@ -34,11 +34,11 @@ export function NavbarMenuComponent() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   function handleDownload(ev: React.MouseEvent<HTMLAnchorElement>) {
-      ev.preventDefault()
-      toast.warning("CV indisponível", {
-        description: "O currículo ainda não foi disponibilizado para download.",
-      })
-    
+    ev.preventDefault()
+    toast.success("Sucesso!", {
+      description: "Iniciando Download!",
+    })
+
   }
 
   return (
@@ -52,11 +52,12 @@ export function NavbarMenuComponent() {
             <AnimatedThemeToggler />
 
             <NavbarButton
-              // href={siteConfig.links.cv || "#"}
-              href={"#"}
+              // href={"#"}
+              download={"../public/cv/Gabriel_RodriguesLima_Currículo.pdf"}
+              target="_blank"
               rel="noreferrer"
               onClick={handleDownload}
-              className="flex items-center gap-1"
+              className="flex items-center gap-1 cursor-pointer"
               variant="primary"
             >
               <DownloadCloud size={16} />
@@ -96,7 +97,7 @@ export function NavbarMenuComponent() {
 
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
-                href={siteConfig.links.cv || "#"}
+                download={"../public/cv/Gabriel_RodriguesLima_Currículo.pdf"}
                 target="_blank"
                 rel="noreferrer"
                 onClick={(ev: React.MouseEvent<HTMLAnchorElement>) => {
@@ -104,7 +105,7 @@ export function NavbarMenuComponent() {
                   setIsMobileMenuOpen(false)
                 }}
                 variant="primary"
-                className="w-full justify-center gap-1"
+                className="w-full justify-center gap-1 cursor-pointer"
               >
                 <DownloadCloud size={16} />
                 Download CV

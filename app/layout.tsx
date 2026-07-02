@@ -68,7 +68,7 @@ export default function RootLayout({
             />
             <ScrollProgress />
           </div>
-          <BackgroundBeams className="pointer-events-none fixed -z-10 hidden md:block opacity-70" />
+          {/* <BackgroundBeams className="pointer-events-none fixed -z-10 hidden md:block opacity-70" /> */}
           <Toaster
             position="top-center"
             richColors

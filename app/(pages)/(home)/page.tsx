@@ -145,8 +145,6 @@ export default function HomePage() {
 
       <MarqueeComponent />
 
-      <ProjectsSectionComponent />
-
       <div>
         <Box className="px-4 py-14 md:px-8 md:py-24">
           <motion.div
